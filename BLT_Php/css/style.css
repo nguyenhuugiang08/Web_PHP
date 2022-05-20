@@ -1,0 +1,74 @@
+.overlay{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0 , 0 , 0.4);
+}
+
+.password-group {
+    position: relative;
+}
+
+.display-password {
+    position: absolute;
+    right: 9px;
+    top: 11px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.hiden-password {
+    position: absolute;
+    right: 9px;
+    top: 11px;
+    cursor: pointer;
+    display: none;
+}
+
+/* login form css */
+.login-form {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+    z-index: 1;
+    width: 500px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.register__link {
+    line-height: 1.2;
+    text-decoration: none;
+    color: red;
+    font-size: 16px;
+}
+
+/* register form css */
+.register-form {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+    z-index: 1;
+    width: 500px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.login__link {
+    line-height: 1.2;
+    text-decoration: none;
+    color: red;
+    font-size: 16px;
+}
