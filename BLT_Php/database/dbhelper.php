@@ -25,6 +25,26 @@ function execute($sql)
 function executeResult($sql)
 {
     // Mở kết nối database
+	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
+	mysqli_set_charset($conn, 'utf8');
+
+	//B2. Thuc hien truy van insert
+	$resultset = mysqli_query($conn, $sql);
+	$data      = [];
+
+	while (($row = mysqli_fetch_array($resultset)) != null) {
+		$data[] = $row;
+	}
+
+	//B3. Dong ket noi database
+	mysqli_close($conn);
+
+	return $data;
+}
+
+function executeResultOne($sql)
+{
+    // Mở kết nối database
     $con = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
     mysqli_set_charset($con, 'utf8');
 

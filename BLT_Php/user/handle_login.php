@@ -19,7 +19,7 @@ if (!empty($_POST)) {
     //     $error['pwd'] = "Mật khẩu tối thiểu 8 ký tự, ít nhất một chữ cái, một số và một ký tự đặc biệt.";
     // }
     $sql = 'select *from users where email="' . $email . '" and password = "' . $password . '"';
-    $user = executeResult($sql);
+    $user = executeResultOne($sql);
     if (isset($user['role']) && $user['role'] == "Admin") {
         header('Location: ../Admin/index.php');
         die();

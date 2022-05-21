@@ -17,8 +17,6 @@ if (!empty($_POST)) {
         $_SESSION['password'] = $password;
         $_SESSION['phone_number'] = $phone_number;
 
-        var_dump($_SESSION['email'], $_SESSION['password']);
-
         $sql = "insert into users(fullname, username, email, password, phone_number)
         values ('$fullname','$username','$email','$password','$phone_number')";
 
