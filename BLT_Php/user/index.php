@@ -30,48 +30,50 @@ require_once('handle_login.php');
 </head>
 
 <body>
-    <div class="overlay">
-        <div class="login-form">
-            <div class="heading">
-                <h2>Đăng Nhập</h2>
-                <a href="register_form.php" class="register__link">Đăng ký</a>
+    <div class="overlay ">
+        <div class="login-form d-flex">
+            <div class="login-form__bg">
+                <img src="../images/team.jpg" alt="" class="login-form__img">
             </div>
-            <form class="row g-3 needs-validation" novalidate method="post">
-                <div class="col-md-12">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control " id="email" name="email"
-                     value="<?=isset($_COOKIE['remember']) && $_COOKIE['remember'] == "checked" ?
-                      (isset($_COOKIE['email']) ? $_COOKIE['email'] : "") : ""?>" required>
-                    <div class="invalid-feedback">
-                        Vui lòng nhập Email.
-                        <!-- <?= empty($error['email']) ? $error['email'] : "" ?> -->
-                    </div>
+            <div>
+                <div class="heading">
+                    <h2>Đăng Nhập</h2>
+                    <a href="register_form.php" class="register__link">Đăng ký</a>
                 </div>
-                <div class="col-md-12">
-                    <label for="password" class="form-label">Password</label>
-                    <div class="password-group">
-                        <input type="password" class="form-control" id="password" name="password"
-                        value="<?=isset($_COOKIE['remember']) && $_COOKIE['remember'] == "checked" ?
-                         (isset($_COOKIE['password']) ? $_COOKIE['password'] : "") : ""?>" required>
-                        <i class="fa-solid fa-eye-slash hiden-password"></i>
-                        <i class="fa-solid fa-eye display-password"></i>
+                <form class="row g-3 needs-validation" novalidate method="post">
+                    <div class="col-md-12">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control " id="email" name="email" value="<?= isset($_COOKIE['remember']) && $_COOKIE['remember'] == "checked" ?
+                                                                                                        (isset($_COOKIE['email']) ? $_COOKIE['email'] : "") : "" ?>" required>
                         <div class="invalid-feedback">
-                            Vui lòng nhập password.
-                            <!-- <?= empty($error['pwd']) ? $error['pwd'] : "" ?> -->
+                            Vui lòng nhập Email.
+                            <!-- <?= empty($error['email']) ? $error['email'] : "" ?> -->
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                        <input type="checkbox" value="checked" class="remember"
-                         name="checkbox_remember" <?=isset($_COOKIE['remember']) ? $_COOKIE['remember'] : ""?> >
+                    <div class="col-md-12">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="password-group">
+                            <input type="password" class="form-control" id="password" name="password" value="<?= isset($_COOKIE['remember']) && $_COOKIE['remember'] == "checked" ?
+                                                                                                                    (isset($_COOKIE['password']) ? $_COOKIE['password'] : "") : "" ?>" required>
+                            <i class="fa-solid fa-eye-slash hiden-password"></i>
+                            <i class="fa-solid fa-eye display-password"></i>
+                            <div class="invalid-feedback">
+                                Vui lòng nhập password.
+                                <!-- <?= empty($error['pwd']) ? $error['pwd'] : "" ?> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" value="checked" class="remember" name="checkbox_remember" <?= isset($_COOKIE['remember']) ? $_COOKIE['remember'] : "" ?>>
                         <label for="invalidCheck">
                             Remember me
                         </label>
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Đăng Nhập</button>
-                </div>
-            </form>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary " type="submit">Đăng Nhập</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -104,15 +106,14 @@ require_once('handle_login.php');
         pwdDisplayElement.addEventListener('click', (e) => {
             pwdElement.setAttribute("type", "text")
             e.target.style.display = "none"
-            pwdHidenElement.style.display="block"
+            pwdHidenElement.style.display = "block"
         })
 
         pwdHidenElement.addEventListener('click', (e) => {
             pwdElement.setAttribute("type", "password")
             e.target.style.display = "none"
-            pwdDisplayElement.style.display="block"
+            pwdDisplayElement.style.display = "block"
         })
-
     </script>
 </body>
 

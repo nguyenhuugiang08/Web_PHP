@@ -77,7 +77,7 @@ require_once('handle_register.php');
                 </div>
             </div>
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Đăng Ký</button>
+                <button class="btn btn-success" type="submit">Đăng Ký</button>
             </div>
         </form>
         </div>

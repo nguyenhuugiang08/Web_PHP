@@ -1,8 +1,10 @@
 <?php
-    require_once('../layout/admin_header.php');
+require_once('../../database/dbhelper.php');
+require_once('../../utils/utility.php');
+$sql = "SELECT * FROM users except SELECT * FROM users where role = 'Admin' limit 7";
+$userList = executeResult($sql);
 
-    $sql = "SELECT * FROM users except SELECT * FROM users where role = 'Admin' limit 7";
-    $userList = executeResult($sql);
+require_once('../layout/admin_header.php');
 ?>
 
 <div class="category">
@@ -51,10 +53,12 @@
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-warning d-flex btn-action">
-                                    <i class="fa-solid fa-pen-to-square table-icon"></i>
-                                    Edit
-                                </button>
+                                <a href = "edit_user.php?id= '.$item['id'].'" style = "text-decoration: none;">
+                                    <button class="btn btn-warning d-flex btn-action">
+                                        <i class="fa-solid fa-pen-to-square table-icon"></i>
+                                        Edit
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                         ';

@@ -1,34 +1,42 @@
 <?php
-require_once('../layout/admin_header.php');
 require_once('../../database/dbhelper.php');
 require_once('../../utils/utility.php');
 
 $fullname = $username = $email = $password = $phone_number = '';
-if (!empty($_POST)) {
-    $fullname = getPOST('fullname');
-    $username = getPOST('username');
-    $email = getPOST('email');
-    $password = getPOST('password');
-    $phone_number = getPOST('phone_number');
+if (!empty($_GET)) {
+    $id = getGET('id');
 
-    date_default_timezone_set("Asia/Bangkok");
-    $create_at = $update_at = date('Y-m-d H:i:s');
+    $query = "SELECT *FROM users where id = '$id'";
+    $data = executeResultOne($query);
 
-    if ($fullname != '' && $username != '' && $email != '' && $password != '' && $phone_number != '') {
+    if (!empty($_POST)) {
+        $fullname = getPOST('fullname');
+        $username = getPOST('username');
+        $email = getPOST('email');
+        $password = getPOST('password');
+        $phone_number = getPOST('phone_number');
 
-        $sql = "insert into users(fullname, username, email, password, phone_number, create_at, update_at)
-        values ('$fullname','$username','$email','$password','$phone_number','$create_at','$update_at')";
+        date_default_timezone_set("Asia/Bangkok");
+        $update_at = date('Y-m-d H:i:s');
+
+        $sql = "UPDATE `users` SET `fullname`='$fullname',`username`='$username',`email`='$email',`password`='$password',
+        `phone_number`='$phone_number',`update_at`='$update_at' WHERE id = '$id'";
 
         execute($sql);
+
+        header('Location: admin_users.php');
+        die();
     }
 }
+require_once('../layout/admin_header.php');
+
 ?>
 <div class="category">
-    Danh sách khách hàng/ Tạo khách hàng mới
+    Danh sách khách hàng/ Cập nhật khách hàng
 </div>
 
 <div class="product-process">
-    <h3 class="tile-title">Tạo mới khách hàng</h3>
+    <h3 class="tile-title">Cập nhật khách hàng</h3>
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
@@ -36,23 +44,23 @@ if (!empty($_POST)) {
                     <form class="row" method="post">
                         <div class="form-group col-md-4">
                             <label class="control-label">Fullname</label>
-                            <input class="form-control" type="text" name="fullname">
+                            <input class="form-control" type="text" name="fullname" value="<?= $data['fullname'] ?>" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Username</label>
-                            <input class="form-control" type="text" name="username" required>
+                            <input class="form-control" type="text" name="username" value="<?= $data['username'] ?>" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Email</label>
-                            <input class="form-control" type="email" name="email" required>
+                            <input class="form-control" type="email" name="email" value="<?= $data['email'] ?>" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Password</label>
-                            <input class="form-control" type="text" name="password" required>
+                            <input class="form-control" type="text" name="password" value="<?= $data['password'] ?>" required>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Số điện thoại</label>
-                            <input class="form-control" type="text" name="phone_number" required>
+                            <input class="form-control" type="text" name="phone_number" value="<?= $data['phone_number'] ?>" required>
                         </div>
                         <div class="form-group col-md-12 mb-5">
                             <label class="control-label">Ảnh 3x4 nhân viên</label>
@@ -69,7 +77,7 @@ if (!empty($_POST)) {
                             </div>
                         </div>
                 </div>
-                <button class="btn btn-success mb-3" type="submit">Lưu lại</button>
+                <button class="btn btn-success mb-3" type="submit">Cập nhật</button>
                 <a class="btn btn-danger mb-3" href="admin_users.php">Hủy bỏ</a>
             </div>
         </div>

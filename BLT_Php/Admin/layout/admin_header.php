@@ -3,7 +3,7 @@ require_once('../../database/dbhelper.php');
 require_once('../../utils/utility.php');
 
 $sql = "SELECT *from users WHERE role ='Admin'";
-$result = executeResult($sql);
+$result = executeResultOne($sql);
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $result = executeResult($sql);
         <nav class="nav-category">
             <div class="nav-category__info">
                 <img src="https://lh3.googleusercontent.com/a-/AOh14Gg38uWNyO9BTDmSGx-aZRH--NzshOtQ-wyL7RXU2A=s360-p-rw-no" class="avatar" alt="">
-                <span><?= $result['0']['fullname'] ?></span>
+                <span><?= $result['fullname'] ?></span>
             </div>
             <ul class="control-list">
                 <li class="control-list__item">
@@ -84,7 +84,7 @@ $result = executeResult($sql);
 
         <div class="content">
             <div class="header">
-                <a href="../user/" class="header-link">
+                <a href="../../user/" class="header-link">
                     <button class="btn btn-warning">
                         <i class="fa-solid fa-right-to-bracket header-link__icon"></i>
                         Logout

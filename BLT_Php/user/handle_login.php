@@ -21,7 +21,7 @@ if (!empty($_POST)) {
     $sql = 'select *from users where email="' . $email . '" and password = "' . $password . '"';
     $user = executeResultOne($sql);
     if (isset($user['role']) && $user['role'] == "Admin") {
-        header('Location: ../Admin/index.php');
+        header('Location: ../Admin/home/index.php');
         die();
     } else {
         if (isset($user['email']) && $user['email'] == $email && $user['password'] == $password) {
