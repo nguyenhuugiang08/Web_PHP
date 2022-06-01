@@ -18,9 +18,12 @@ if (!empty($_POST)) {
     // if(!preg_match($passwordRegex, $password)){
     //     $error['pwd'] = "Mật khẩu tối thiểu 8 ký tự, ít nhất một chữ cái, một số và một ký tự đặc biệt.";
     // }
-    $sql = 'select *from users where email="' . $email . '" and password = "' . $password . '"';
+
+
+
+    $sql = 'select *from user, role where email="' . $email . '" and password = "' . $password . '" and role.id = user.role_id';
     $user = executeResultOne($sql);
-    if (isset($user['role']) && $user['role'] == "Admin") {
+    if (isset($user['name']) && $user['name'] == "Admin") {
         header('Location: ../Admin/home/index.php');
         die();
     } else {
@@ -32,10 +35,12 @@ if (!empty($_POST)) {
             }else{
                 setcookie('remember', "unchecked", time() + 30 * 24 * 60 * 60, '/');
             }
-            header('Location: ../products.php');
+            header('Location: ../index.php');
             die();
         } else {
             echo '<script>alert("Sai mật khẩu hoặc email. Vui lòng nhập lại!")</script>';
         }
     }
+
+
 }

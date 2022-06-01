@@ -1,7 +1,16 @@
 <?php
 require_once('../../database/dbhelper.php');
 require_once('../../utils/utility.php');
-$sql = "SELECT * FROM users except SELECT * FROM users where role = 'Admin' limit 7";
+
+$query = "select count(id) as countUser from user where role_id = '2'";
+$countUser = executeResultOne($query);
+$pages = ceil(((int)$countUser['countUser'])/6);
+$index = 0;
+if(!empty($_GET)){
+    $index = ((int)(getGET('page')) -1)*6;
+}
+
+$sql = "SELECT * FROM user except SELECT * FROM user where role_id = '1' limit $index,6";
 $userList = executeResult($sql);
 
 require_once('../layout/admin_header.php');
@@ -44,8 +53,8 @@ require_once('../layout/admin_header.php');
                             <td>' . $item['email'] . '</td>
                             <td>' . $item['password'] . '</td>
                             <td>' . $item['phone_number'] . '</td>
-                            <td>' . $item['create_at'] . '</td>
-                            <td>' . $item['update_at'] . '</td>
+                            <td>' . $item['created_at'] . '</td>
+                            <td>' . $item['updated_at'] . '</td>
                             <td>
                                 <button class="btn btn-danger d-flex btn-action" onClick="deleteUser(' . $item['id'] . ')">
                                     <i class="fa-solid fa-trash table-icon"></i>
@@ -66,6 +75,32 @@ require_once('../layout/admin_header.php');
                 ?>
               </tbody>
             </table>
+    </div>
+    <div class="row">
+        <div>
+            Hiển thị 7 người dùng
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <?php
+                    for($i=1; $i <= $pages; $i++){
+                        echo '
+                        <li class="page-item"><a class="page-link" href="?page= '.$i.'">'.$i.'</a></li>
+                        ';
+                    }
+                ?>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
 </div>

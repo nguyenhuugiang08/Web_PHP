@@ -3,22 +3,32 @@ require_once('../layout/admin_header.php');
 require_once('../../database/dbhelper.php');
 require_once('../../utils/utility.php');
 
-$title = $cate_id = $price = $description = '';
+$title = $cate_id = $price = $description = $thumbnail = $discount = '';
 if (!empty($_POST)) {
     $title = getPOST('title');
-    $cate_id = (float)getPOST('cate_id');
+    $cate_id = getPOST('cate_id');
+
+    $sql = "SELECT id FROM category WHERE name = '$cate_id'";
+    $array_id = executeResultOne($sql);
+    $id = $array_id['id'];
+
     $price = getPOST('price');
+    $discount = getPOST('discount');
+    $thumbnail = getPOST('ImageUpload');
     $description = getPOST('description');
 
-    $create_at = $update_at = date('Y-m-d H:s:i');
+    $create_at = $update_at = date('Y-m-d H:i:s');
 
-    if ($title != '' && $cate_id != '' && $price != '' && $description != '') {
-        $sql = "INSERT INTO products(cate_id, title, price, descripton, create_at, update_at)
-         VALUES ('$cate_id','$title','$price','$description','$create_at','$update_at')";
+    if ($title != '' && $cate_id != '' && $price != '' && $discount != '' && $thumbnail != '' && $description != '') {
+        $sql = "INSERT INTO product(category_id, title, price, discount, thumbnail, description, created_at, updated_at)
+         VALUES ('$id','$title','$price','$discount','$thumbnail','$description','$create_at','$update_at')";
 
         execute($sql);
     }
 }
+
+$sql = "SELECT * FROM category";
+$data = executeResult($sql);
 ?>
 
 <div class="category">
@@ -32,17 +42,33 @@ if (!empty($_POST)) {
             <div class="tile">
                 <div class="tile-body">
                     <form class="row" method="post">
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Cate ID</label>
-                            <input class="form-control" type="text" name="cate_id" required>
+                        <div class="form-group mb-3 col-md-4">
+                            <label for="floatingSelect">Danh mục sản phẩm</label>
+                            <select class="form-select" id="floatingSelect"  name = "cate_id">
+                                <?php
+                                foreach ($data as $item) {
+                                    $selected = "";
+                                    if($item['name'] == "Nam"){
+                                        $selected = "selected";
+                                    }else $selected = "";
+                                    echo '
+                                        <option '.$selected.'>'.$item['name'].'</option>
+                                    ';
+                                }
+                                ?>
+                            </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group mb-3 col-md-4">
                             <label class="control-label">Title</label>
                             <input class="form-control" type="text" name="title" required>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group mb-3 col-md-4">
                             <label class="control-label">Giá bán</label>
                             <input class="form-control" type="text" name="price" required>
+                        </div>
+                        <div class="form-group mb-3 col-md-4">
+                            <label class="control-label">Giá bán giảm giá</label>
+                            <input class="form-control" type="text" name="discount" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="control-label">Ảnh 3x4 nhân viên</label>
@@ -73,7 +99,6 @@ if (!empty($_POST)) {
     </div>
 </div>
 </div>
-
 <script>
     function readURL(input, thumbimage) {
         if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome

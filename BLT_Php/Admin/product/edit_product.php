@@ -2,73 +2,95 @@
 require_once('../../database/dbhelper.php');
 require_once('../../utils/utility.php');
 
-$fullname = $username = $email = $password = $phone_number = '';
+$title = $cate_id = $price = $description = $thumbnail = $discount = '';
 if (!empty($_GET)) {
     $id = getGET('id');
 
-    $query = "SELECT *FROM users where id = '$id'";
-    $data = executeResultOne($query);
+    $query = "SELECT *FROM product where id = '$id'";
+    $data_product = executeResultOne($query);
 
     if (!empty($_POST)) {
-        $fullname = getPOST('fullname');
-        $username = getPOST('username');
-        $email = getPOST('email');
-        $password = getPOST('password');
-        $phone_number = getPOST('phone_number');
-
-        date_default_timezone_set("Asia/Bangkok");
+        $title = getPOST('title');
+        $cate_id = getPOST('cate_id');
+    
+        $sql = "SELECT id FROM category WHERE name = '$cate_id'";
+        $array_id = executeResultOne($sql);
+        $id_cate = $array_id['id'];
+    
+        $price = getPOST('price');
+        $discount = getPOST('discount');
+        $thumbnail = getPOST('ImageUpload');
+        if($thumbnail == ""){
+            $thumbnail = $data_product['thumbnail'];
+        }
+        $description = getPOST('description');
+    
         $update_at = date('Y-m-d H:i:s');
-
-        $sql = "UPDATE `users` SET `fullname`='$fullname',`username`='$username',`email`='$email',`password`='$password',
-        `phone_number`='$phone_number',`update_at`='$update_at' WHERE id = '$id'";
-
-        execute($sql);
-
-        header('Location: admin_users.php');
-        die();
+    
+        if ($title != '' && $cate_id != '' && $price != '' && $discount != '' && $thumbnail != '' && $description != '') {
+            $sql = "UPDATE `product` SET `category_id`='$id_cate',`title`='$title',`price`='$price',
+            `discount`='$discount',`thumbnail`='$thumbnail',`description`='$description',`updated_at`='$update_at' WHERE id = '$id'";
+    
+            execute($sql);
+    
+            header('Location: admin_products.php');
+            die();
+        }
     }
 }
+
+$sql = "SELECT * FROM category";
+$data = executeResult($sql);
+
 require_once('../layout/admin_header.php');
 
 ?>
 <div class="category">
-    Danh sách khách hàng/ Cập nhật khách hàng
+    Danh sách sản phẩm/ Cập nhật sản phẩm
 </div>
 
 <div class="product-process">
-    <h3 class="tile-title">Cập nhật khách hàng</h3>
+    <h3 class="tile-title">Cập nhật sản phẩm</h3>
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
-                    <form class="row" method="post">
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Fullname</label>
-                            <input class="form-control" type="text" name="fullname" value="<?= $data['fullname'] ?>" required>
+                <form class="row" method="post">
+                        <div class="form-group mb-3 col-md-4">
+                            <label for="floatingSelect">Danh mục sản phẩm</label>
+                            <select class="form-select" id="floatingSelect"  name = "cate_id">
+                                <?php
+                                foreach ($data as $item) {
+                                    $selected = "";
+                                    if($item['name'] == "Nam"){
+                                        $selected = "selected";
+                                    }else $selected = "";
+                                    echo '
+                                        <option '.$selected.'>'.$item['name'].'</option>
+                                    ';
+                                }
+                                ?>
+                            </select>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Username</label>
-                            <input class="form-control" type="text" name="username" value="<?= $data['username'] ?>" required>
+                        <div class="form-group mb-3 col-md-4">
+                            <label class="control-label">Title</label>
+                            <input class="form-control" type="text" name="title" value="<?=$data_product['title']?>" required>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Email</label>
-                            <input class="form-control" type="email" name="email" value="<?= $data['email'] ?>" required>
+                        <div class="form-group mb-3 col-md-4">
+                            <label class="control-label">Giá bán</label>
+                            <input class="form-control" type="text" name="price" value="<?=$data_product['price']?>" required>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Password</label>
-                            <input class="form-control" type="text" name="password" value="<?= $data['password'] ?>" required>
+                        <div class="form-group mb-3 col-md-4">
+                            <label class="control-label">Giá bán giảm giá</label>
+                            <input class="form-control" type="text" name="discount" value="<?=$data_product['discount']?>" required>
                         </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Số điện thoại</label>
-                            <input class="form-control" type="text" name="phone_number" value="<?= $data['phone_number'] ?>" required>
-                        </div>
-                        <div class="form-group col-md-12 mb-5">
+                        <div class="form-group col-md-12">
                             <label class="control-label">Ảnh 3x4 nhân viên</label>
                             <div id="myfileupload">
                                 <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
                             </div>
                             <div id="thumbbox">
-                                <img height="300" width="300" alt="Thumb image" id="thumbimage" style="display: none" />
+                                <img height="300" width="300" alt="Thumb image" id="thumbimage" src="<?=$data_product['thumbnail']?>"  />
                                 <a class="removeimg" href="javascript:"></a>
                             </div>
                             <div id="boxchoice">
@@ -76,9 +98,16 @@ require_once('../layout/admin_header.php');
                                 <p style="clear:both"></p>
                             </div>
                         </div>
+                        <div class="form-group col-md-12 mb-5">
+                            <label class="control-label">Mô tả sản phẩm</label>
+                            <textarea class="form-control" name="description" id="mota"><?=$data_product['title']?></textarea>
+                            <script>
+                                CKEDITOR.replace('mota');
+                            </script>
+                        </div>
                 </div>
                 <button class="btn btn-success mb-3" type="submit">Cập nhật</button>
-                <a class="btn btn-danger mb-3" href="admin_users.php">Hủy bỏ</a>
+                <a class="btn btn-danger mb-3" href="admin_products.php">Hủy bỏ</a>
             </div>
         </div>
     </div>
@@ -111,7 +140,7 @@ require_once('../layout/admin_header.php');
 
         });
         $(".removeimg").click(function() {
-            $("#thumbimage").attr('src', '').hide();
+            $("#thumbimage").attr('src', '<?=$data_product['thumbnail']?>');
             $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
             $(".removeimg").hide();
             $(".Choicefile").bind('click', function() {
