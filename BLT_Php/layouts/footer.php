@@ -1,6 +1,9 @@
+<div class="up-to-top">
+    <i class="fa-solid fa-angle-up"></i>
+</div>
 <div class="footer">
-    <div class="container">
-        <div class="row">
+    <div class="container ">
+        <div class="row footer-main">
             <div class="col-md-3">
                 <h3 class="footer-heading">GIỚI THIỆU</h3>
                 <div class="footer-intro">
@@ -11,7 +14,7 @@
                 <h3 class="footer-heading">ĐỊA CHỈ</h3>
                 <ul class="address-list">
                     <li class="address-list__item d-flex" style="left: 0; top: 0;">
-                        <i class="fa-solid fa-location-dot address-list__icon"></i>
+                        <i class="fa-solid fa-location-dot address-list__icon address-list__icon--active"></i>
                         <div>319 C16 Lý Thường Kiệt, Phường 15, Quận 11, Tp.HCM</div>
                     </li>
                     <li class="address-list__item">
@@ -19,7 +22,7 @@
                         <a href="#" class="address-list__link"> 076 922 0162</a>
                     </li>
                     <li class="address-list__item d-flex" style="left: 0; top: 0;">
-                        <i class="fa-solid fa-envelope-open-text address-list__icon"></i>
+                        <i class="fa-solid fa-envelope-open-text address-list__icon address-list__icon--active"></i>
                         <div>
                             <a href="#" class="address-list__link"> demonhunterg@gmail.com</a>
                             <a href="#" class="address-list__link"> mon@mona.media</a>
@@ -64,33 +67,44 @@
             <div class="col-md-3">
                 <h3 class="footer-heading">MẠNG XÃ HỘI</h3>
                 <div class="social-list d-flex">
-                    <div class="social-item">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </div>
-                    <div class="social-item">
-                        <i class="fa-brands fa-instagram social-icon"></i>
-                    </div>
-                    <div class="social-item">
-                        <i class="fa-brands fa-twitter social-icon"></i>
-                    </div>
-                    <div class="social-item">
-                        <i class="fa-brands fa-pinterest social-icon"></i>
-                    </div>
-                    <div class="social-item">
-                        <i class="fa-solid fa-rss social-icon"></i>
-                    </div>
+                    <a href="#" class="social-link facebook">
+                        <div class="social-item">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="social-link instagram">
+                        <div class="social-item">
+                            <i class="fa-brands fa-instagram social-icon"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="social-link twitter">
+                        <div class="social-item">
+                            <i class="fa-brands fa-twitter social-icon"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="social-link printerest">
+                        <div class="social-item">
+                            <i class="fa-brands fa-pinterest social-icon"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="social-link rss">
+                        <div class="social-item">
+                            <i class="fa-solid fa-rss social-icon"></i>
+                        </div>
+                    </a>
+
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3">
-                <h3>ĐĂNG KÝ NHẬN THÔNG TIN</h3>
+                <h3 class="footer-bottom__title">ĐĂNG KÝ NHẬN THÔNG TIN</h3>
             </div>
-            <div class="col-md-4">
-                <input type="email" placeholder="Email...">
-                <button class="btn btn-danger">ĐĂNG KÝ</button>
+            <div class="col-md-4 d-flex">
+                <input type="email" placeholder="Email..." class="footer-bottom__input">
+                <button class="btn-register">ĐĂNG KÝ</button>
             </div>
-            <div class="col-md-5 d-flex">
+            <div class="col-md-5 d-flex justify-content-center">
                 <div class="mb-5">
                     <img src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/payment1.png" alt="">
                 </div>
@@ -110,3 +124,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    upToTopElement = document.querySelector('.up-to-top')
+
+    document.onscroll = () => {
+        if (document.documentElement.scrollTop >= 800) {
+            upToTopElement.style.display = "flex"
+        } else {
+            upToTopElement.style.display = "none"
+        }
+    }
+    upToTopElement.onclick = () => {
+        document.documentElement.scrollTop = 0
+    }
+</script>

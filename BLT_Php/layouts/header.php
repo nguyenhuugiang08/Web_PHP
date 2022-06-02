@@ -1,6 +1,6 @@
 <?php
-    require_once('database/dbhelper.php');
-    require_once('utils/utility.php');
+require_once('database/dbhelper.php');
+require_once('utils/utility.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,8 @@
     <!-- Latest compiled JavaScript -->
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <title>Trang chủ</title>
 </head>
 
