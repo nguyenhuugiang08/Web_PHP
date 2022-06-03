@@ -16,23 +16,23 @@ if (!empty($_GET)) {
 }
 
 $firstname = $lastname = $email = $phone_number = $evaluate = '';
-// if(!empty($_POST)){
-//     $firstname = getPOST('firstname');
-//     $lastname = getPOST('lastname');
-//     $email = getPOST('email');
-//     $phone_number = getPOST('phone_number');
-//     $evaluate = getPOST('evaluate');
-//     var_dump($firstname);
+if(!empty($_POST)){
+    $firstname = getPOST('firstname');
+    $lastname = getPOST('lastname');
+    $email = getPOST('email');
+    $phone_number = getPOST('phone_number');
+    $evaluate = getPOST('evaluate');
+    var_dump($firstname);
 
-//     date_default_timezone_set("Asia/Bangkok");
-//     $create_at = $update_at = date('Y-m-d H:i:s');
+    date_default_timezone_set("Asia/Bangkok");
+    $create_at = $update_at = date('Y-m-d H:i:s');
 
-//     if(!empty($firstname) && !empty($lastname) && !empty($email) && !empty($phone_number) && !empty($evaluate)){
-//         $sql = "INSERT INTO feedback(firstname, lastname, email, phone_number, subject_name,created_at, updated_at)
-//          VALUES ('$firstname','$lastname','$email','$phone_number','$evaluate','$create_at','$update_at')";
-//         execute($sql);
-//     }
-// }
+    if(!empty($firstname) && !empty($lastname) && !empty($email) && !empty($phone_number) && !empty($evaluate)){
+        $sql = "INSERT INTO feedback(firstname, lastname, email, phone_number, subject_name,created_at, updated_at)
+         VALUES ('$firstname','$lastname','$email','$phone_number','$evaluate','$create_at','$update_at')";
+        execute($sql);
+    }
+}
 ?>
 <style>
     <?php
@@ -258,13 +258,20 @@ require_once('layouts/footer.php');
         deAdditionElement.style.borderBottom = "0px solid #c30005"
         additionElement.style.display = "none"
     }
-
+    
     $('.autoplay').slick({
         slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
     });
+
+    let btnPrevElement = document.querySelector('.slick-prev')
+    let btnNextElement = document.querySelector('.slick-next')
+
+    btnPrevElement.innerHTML = '<i class="fa-solid fa-angle-left"></i>'
+    btnNextElement.innerHTML = '<i class="fa-solid fa-angle-right"></i>'
+  
 </script>
 
 </html>

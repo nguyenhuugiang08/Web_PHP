@@ -74,7 +74,7 @@ require_once('utils/utility.php');
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" href="#">TRANG CHỦ</a>
+                                        <a class="nav-link" aria-current="page" href="../../BLT_Php/">TRANG CHỦ</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">GIỚI THIỆU</a>
@@ -83,7 +83,7 @@ require_once('utils/utility.php');
                                         <a class="nav-link" href="#">NAM</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link ">NỮ</a>
+                                        <a class="nav-link " href="../../BLT_Php/women_products.php">NỮ</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link ">TRẺ EM</a>

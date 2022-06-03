@@ -2,12 +2,14 @@
     padding: 0;
     margin: 0;
     -webkit-user-select: none;
-    border: none;
+    box-sizing: border-box;
 }
+
 .main {
     position: fixed;
     z-index: 99;
-    width: 100%;
+    left: 0;
+    right: 0;
     top: 0;
 }
 
@@ -217,19 +219,19 @@
 }
 
 .instagram {
-    color: #3b6994 ;
+    color: #3b6994;
 }
 
 .twitter {
-    color: #2478ba ;
+    color: #2478ba;
 }
 
 .printerest {
-    color: #cb2320 ;
+    color: #cb2320;
 }
 
 .rss {
-    color: #fc7600 ;
+    color: #fc7600;
 }
 
 .social-item {
@@ -240,7 +242,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: currentColor ;
+    background-color: currentColor;
 }
 
 .social-item i {
@@ -283,11 +285,11 @@
     position: relative;
 }
 
-.banner-fill:hover .show-product{
+.banner-fill:hover .show-product {
     display: flex;
 }
 
-.banner-fill:hover{
+.banner-fill:hover {
     border: 1px solid #000;
 }
 
@@ -316,9 +318,10 @@
 }
 
 @keyframes show {
-    from{
+    from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -390,7 +393,7 @@
     transition: all ease 0.3s;
 }
 
-.add-cart:hover{
+.add-cart:hover {
     color: #fff;
 }
 
@@ -413,9 +416,9 @@
 }
 
 .banner-promotion__img {
-   width: 100%;
-   height: 500px;
-   margin: 50px 0 ;
+    width: 100%;
+    height: 500px;
+    margin: 50px 0;
 }
 
 .banner-promotion {
@@ -423,6 +426,7 @@
     color: #fff;
     font-size: 3.5em;
 }
+
 .banner-promotion__item {
     position: absolute;
     left: 50%;
@@ -446,8 +450,9 @@
     cursor: pointer;
     color: #fff;
     text-decoration: none;
-   
+
 }
+
 .banner-promotion__all-product:hover {
     border-color: #171717;
     background-color: #171717;
@@ -455,7 +460,7 @@
 }
 
 .up-to-top {
-    position:fixed;
+    position: fixed;
     bottom: 20px;
     right: 20px;
     border: 2px solid #a4a4a4;
@@ -473,4 +478,3 @@
 .up-to-top:hover {
     background-color: #c30005;
 }
-

@@ -6,7 +6,7 @@ $query = "select count(id) as countProduct from product";
 $countProduct = executeResultOne($query);
 $pages = ceil(((int)$countProduct['countProduct'])/6);
 $index = 0;
-$page = 0;
+$page = 1;
 if(!empty($_GET)){
     $page = getGET('page');
     $index = ((int)$page -1)*6;

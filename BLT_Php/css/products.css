@@ -1,0 +1,159 @@
+.women-main {
+    margin-top: 216px;
+}
+
+.heading-left {
+    display: flex;
+    font-size: 1.25em;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.heading-left a {
+    text-decoration: none;
+    color: #a4a4a4;
+}
+
+.heading-left a:hover {
+    color: #353535;
+}
+
+.heading-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* filter */
+.range-slide {
+    position: relative;
+    margin: 20px 0;
+    height: 4px;
+    width: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    height: 4px;
+    background: #ccc;
+    left: 9px;
+    right: 9px;
+}
+
+.line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 6px;
+    background-color: #666;
+}
+
+.thumb {
+    position: absolute;
+    z-index: 2;
+    text-align: left;
+    border: 1px solid #666;
+    background-color: #666;
+    border-radius: 50%;
+    outline: none;
+    top: -7px;
+    height: 18px;
+    width: 18px;
+    margin-left: -9px;
+}
+
+.input-range {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    pointer-events: none;
+    z-index: 3;
+    height: 3px;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    margin: 0;
+}
+
+input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: all;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.filter {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 14px;
+    border-radius: 99px;
+    background-color: #666;
+    cursor: pointer;
+}
+
+.display {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+}
+
+.display-title {
+    font-weight: normal;
+}
+
+/* demo product */
+.demo-product__wapper {
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 15px;
+    background-color: rgba(221, 221, 221, 0.1);
+}
+
+.demo-product__list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.demo-product__link {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+    color: #353535;
+    padding-bottom: 2px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.demo-product__link:hover {
+    color: #353535;
+}
+
+.demo-product__img {
+    width: 60px;
+}
+
+.demo-product__title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+/* list product for women */
+.women-product__detail {
+    box-shadow: 0 1px 3px -2px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+    transition: transform .3s, box-shadow .3s, background-color .3s, color .3s, opacity .3s;
+}
+
+.women-product__detail:hover {
+    box-shadow: 0 3px 6px -4px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+}
