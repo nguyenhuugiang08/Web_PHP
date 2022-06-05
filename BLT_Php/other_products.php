@@ -3,10 +3,10 @@ require_once('database/dbhelper.php');
 require_once('layouts/header.php');
 require_once('utils/utility.php');
 
-$sql = "select *from product where category_id = 2 and deleted = 0 limit 7";
+$sql = "select *from product where category_id = 3 limit 7";
 $listProduct = executeResult($sql);
 
-$sql = "select count(id) as countId from product where category_id = 2 and deleted = 0 ";
+$sql = "select count(id) as countId from product where category_id = 3 ";
 $countId = executeResultOne($sql);
 
 $pages = ceil((int)$countId['countId'] / 12);
@@ -22,7 +22,7 @@ $pages = ceil((int)$countId['countId'] / 12);
     <div class="row heading">
         <div class="col-md-6 heading-left">
             <a href="index.php">TRANG CHỦ</a>/
-            <a href="/">NỮ</a>
+            <a href="/">NAM</a>
         </div>
         <div class="col-md-6 heading-right">
             <div>Hiển thị </div>
@@ -55,9 +55,9 @@ $pages = ceil((int)$countId['countId'] / 12);
                 <div class="filter" onclick="filterPrice()">LỌC</div>
                 <div class="display">
                     <span class="display-title">Giá: </span>
-                    <span id="min" class="mx-2">1,120,000đ</span>
+                    <span id="min" class="mx-2">600,000đ</span>
                     <span>-</span>
-                    <span id="max" class="ms-2">2,800,000đ</span>
+                    <span id="max" class="ms-2">1,400,000đ</span>
                 </div>
             </div>
             <div class="demo-product">
@@ -86,7 +86,7 @@ $pages = ceil((int)$countId['countId'] / 12);
         <div class="col-md-9">
             <div class="row" id="wapper-products">
                 <?php
-                $sql = "select *from product where category_id = 2 and deleted = 0 limit 12 ";
+                $sql = "select *from product where category_id = 3 limit 12 ";
                 $productList = executeResult($sql);
                 foreach ($productList as $item) {
                     echo '
@@ -146,7 +146,7 @@ require_once('layouts/footer.php');
         if (newValue > max) return;
         min = newValue;
         $('#thumbMin').css('left', calcLeftPosition(newValue) + '%');
-        $('#min').html((newValue * 16800 + 1120000).toLocaleString('en-US') + "đ");
+        $('#min').html((newValue * 8000 + 600000).toLocaleString('en-US') + "đ");
         $('#line').css({
             'left': calcLeftPosition(newValue) + '%',
             'right': (100 - calcLeftPosition(max)) + '%'
@@ -158,7 +158,7 @@ require_once('layouts/footer.php');
         if (newValue < min) return;
         max = newValue;
         $('#thumbMax').css('left', calcLeftPosition(newValue) + '%');
-        $('#max').html((newValue * 16800 + 1120000).toLocaleString('en-US') + "đ");
+        $('#max').html((newValue * 8000 + 600000).toLocaleString('en-US') + "đ");
         $('#line').css({
             'left': calcLeftPosition(min) + '%',
             'right': (100 - calcLeftPosition(newValue)) + '%'
@@ -172,7 +172,7 @@ require_once('layouts/footer.php');
         $.post('api/api_search.php', {
             "action": "searchProduct",
             "payload": valueSelected,
-            "type": 2
+            "type": 3
         }, function(data, status) {
             $('#wapper-products').html(data)
         })
@@ -184,7 +184,7 @@ require_once('layouts/footer.php');
         $.post('api/api_pagination.php', {
             "action": "currentPage",
             "currentPage": currentPage,
-            "type": 2
+            "type": 3
         }, function(data, status) {
             $('#wapper-products').html(data)
         })
@@ -196,15 +196,15 @@ require_once('layouts/footer.php');
     }
 
     // post data to filter by values of input range
-    let valueRangeMin = 1120000
-    let valueRangeMax = 2800000
+    let valueRangeMin = 600000
+    let valueRangeMax = 1400000
 
     $('#rangeMin').on('change input', (e) => {
-         valueRangeMin = e.target.value * 16800 + 1120000 
+         valueRangeMin = e.target.value * 8000 + 600000 
     });
 
     $('#rangeMax').on('chane input', (e) => {
-         valueRangeMax = e.target.value * 16800 + 1120000
+         valueRangeMax = e.target.value * 8000 + 600000
     });
 
     function filterPrice() {
@@ -212,7 +212,7 @@ require_once('layouts/footer.php');
             "action": "filter",
             "valueRangeMax": valueRangeMax,
             "valueRangeMin": valueRangeMin,
-            "type": 2
+            "type": 3
         }, function(data, status) {
             $('#wapper-products').html(data)
         })
@@ -221,7 +221,7 @@ require_once('layouts/footer.php');
             "action": "filter",
             "valueRangeMax": valueRangeMax,
             "valueRangeMin": valueRangeMin,
-            "type": 2
+            "type": 3
         }, function(data, status) {
             $('#pagination').html(data)
         })
@@ -233,7 +233,7 @@ require_once('layouts/footer.php');
             "valueRangeMax": valueRangeMax,
             "valueRangeMin": valueRangeMin,
             "filterPage": filterPage,
-            "type": 2
+            "type": 3
         }, function(data, status) {
             $('#wapper-products').html(data)
         })

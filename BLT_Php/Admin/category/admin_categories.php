@@ -4,10 +4,10 @@ require_once('../../utils/utility.php');
 
 $query = "select count(id) as countCate from category";
 $countCate = executeResultOne($query);
-$pages = ceil(((int)$countCate['countCate'])/6);
+$pages = ceil(((int)$countCate['countCate']) / 6);
 $index = 0;
-if(!empty($_GET)){
-    $index = ((int)(getGET('page')) -1)*6;
+if (!empty($_GET)) {
+    $index = ((int)(getGET('page')) - 1) * 6;
 }
 
 $sql = "SELECT * FROM category limit $index,6";
@@ -53,10 +53,12 @@ include_once('../layout/admin_header.php');
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-warning d-flex btn-action">
-                                    <i class="fa-solid fa-pen-to-square table-icon"></i>
-                                    Edit
-                                </button>
+                               <a href = "edit_category.php?id='.$item['id'].'" style = "text-decoration: none;">
+                                    <button class="btn btn-warning d-flex btn-action">
+                                        <i class="fa-solid fa-pen-to-square table-icon"></i>
+                                        Edit
+                                    </button>
+                               </a>
                             </td>
                         </tr>
                         ';
@@ -77,11 +79,11 @@ include_once('../layout/admin_header.php');
                     </a>
                 </li>
                 <?php
-                    for($i=1; $i <= $pages; $i++){
-                        echo '
-                        <li class="page-item"><a class="page-link" href="?page= '.$i.'">'.$i.'</a></li>
+                for ($i = 1; $i <= $pages; $i++) {
+                    echo '
+                        <li class="page-item"><a class="page-link" href="?page= ' . $i . '">' . $i . '</a></li>
                         ';
-                    }
+                }
                 ?>
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">

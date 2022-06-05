@@ -10,7 +10,7 @@ if(!empty($_GET)){
     $index = ((int)(getGET('page')) -1)*6;
 }
 
-$sql = "SELECT * FROM user except SELECT * FROM user where role_id = '1' limit $index,6";
+$sql = "SELECT * FROM user where deleted = 0 except SELECT * FROM user where role_id = '1' limit $index,6";
 $userList = executeResult($sql);
 
 require_once('../layout/admin_header.php');

@@ -8,12 +8,12 @@ if (!empty($_POST)) {
     switch ($action) {
         case 'deleteProduct':
             $id = getPOST('id');
-            $sql = "DELETE FROM product WHERE id = $id";
+            $sql = "UPDATE `product` SET `deleted`= 1 WHERE id = $id";
             execute($sql);
             break;
         case 'deleteUser':
             $id = getPOST('id');
-            $sql = "DELETE FROM user WHERE id = $id";
+            $sql = "UPDATE `user` SET `deleted`= 1 WHERE id = $id";
             execute($sql);
             break;
         case 'deleteCategory':

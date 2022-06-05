@@ -1,20 +1,21 @@
 <?php
 require_once('../database/dbhelper.php');
 require_once('../utils/utility.php');
-
-$sql = "select count(id) as countId from product where category_id = 2 ";
-$countId = executeResultOne($sql);
-
-$pages = ceil((int)$countId['countId'] / 12);
 $index = 0;
 $currentPage = 1;
 
 if (!empty($_POST)) {
     $currentPage = getPOST('currentPage');
     $index = ((int)$currentPage - 1) * 12;
+    $type = getPOST('type');
 }
 
-$sql = "select *from product where category_id = 2 limit $index, 12 ";
+$sql = "select count(id) as countId from product where category_id = $type and deleted = 0 ";
+$countId = executeResultOne($sql);
+
+$pages = ceil((int)$countId['countId'] / 12);
+
+$sql = "select *from product where category_id = $type and deleted = 0 limit $index, 12 ";
 $productList = executeResult($sql);
 
 foreach ($productList as $item) {

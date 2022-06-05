@@ -9,9 +9,10 @@ if (!empty($_POST)) {
     $valueRangeMax = getPOST('valueRangeMax');
     $filterPage = getPOST('filterPage');
     $index = ((int)$filterPage - 1) * 12;
+    $type = getPOST('type');
 }
 
-$sql = "select *from product where category_id = 2 and price >= $valueRangeMin and price <= $valueRangeMax limit $index, 12";
+$sql = "select *from product where category_id = $type and price >= $valueRangeMin and price <= $valueRangeMax and deleted = 0 limit $index, 12";
 $productList = executeResult($sql);
 
 foreach ($productList as $item) {

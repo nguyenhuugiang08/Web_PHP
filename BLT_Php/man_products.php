@@ -3,10 +3,10 @@ require_once('database/dbhelper.php');
 require_once('layouts/header.php');
 require_once('utils/utility.php');
 
-$sql = "select *from product where category_id = 2 and deleted = 0 limit 7";
+$sql = "select *from product where category_id = 1 limit 7";
 $listProduct = executeResult($sql);
 
-$sql = "select count(id) as countId from product where category_id = 2 and deleted = 0 ";
+$sql = "select count(id) as countId from product where category_id = 1 ";
 $countId = executeResultOne($sql);
 
 $pages = ceil((int)$countId['countId'] / 12);
@@ -22,7 +22,7 @@ $pages = ceil((int)$countId['countId'] / 12);
     <div class="row heading">
         <div class="col-md-6 heading-left">
             <a href="index.php">TRANG CHỦ</a>/
-            <a href="/">NỮ</a>
+            <a href="/">NAM</a>
         </div>
         <div class="col-md-6 heading-right">
             <div>Hiển thị </div>
@@ -86,7 +86,7 @@ $pages = ceil((int)$countId['countId'] / 12);
         <div class="col-md-9">
             <div class="row" id="wapper-products">
                 <?php
-                $sql = "select *from product where category_id = 2 and deleted = 0 limit 12 ";
+                $sql = "select *from product where category_id = 1 limit 12 ";
                 $productList = executeResult($sql);
                 foreach ($productList as $item) {
                     echo '
@@ -172,7 +172,7 @@ require_once('layouts/footer.php');
         $.post('api/api_search.php', {
             "action": "searchProduct",
             "payload": valueSelected,
-            "type": 2
+            "type": 1
         }, function(data, status) {
             $('#wapper-products').html(data)
         })
@@ -184,7 +184,7 @@ require_once('layouts/footer.php');
         $.post('api/api_pagination.php', {
             "action": "currentPage",
             "currentPage": currentPage,
-            "type": 2
+            "type": 1
         }, function(data, status) {
             $('#wapper-products').html(data)
         })
@@ -212,7 +212,7 @@ require_once('layouts/footer.php');
             "action": "filter",
             "valueRangeMax": valueRangeMax,
             "valueRangeMin": valueRangeMin,
-            "type": 2
+            "type": 1
         }, function(data, status) {
             $('#wapper-products').html(data)
         })
@@ -221,7 +221,7 @@ require_once('layouts/footer.php');
             "action": "filter",
             "valueRangeMax": valueRangeMax,
             "valueRangeMin": valueRangeMin,
-            "type": 2
+            "type": 1
         }, function(data, status) {
             $('#pagination').html(data)
         })
@@ -233,7 +233,7 @@ require_once('layouts/footer.php');
             "valueRangeMax": valueRangeMax,
             "valueRangeMin": valueRangeMin,
             "filterPage": filterPage,
-            "type": 2
+            "type": 1
         }, function(data, status) {
             $('#wapper-products').html(data)
         })

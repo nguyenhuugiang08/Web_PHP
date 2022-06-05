@@ -138,4 +138,26 @@
     upToTopElement.onclick = () => {
         document.documentElement.scrollTop = 0
     }
+
+    $('.header-account').on('mouseover', () => {
+        $('.cart-show__info')[0].style.display = "block"
+    })
+
+    $('.header-account').on('mouseout', () => {
+        $('.cart-show__info')[0].style.display = "none"
+    })
+
+    function addCart(id) {
+        $('.cart-show__info')[0].style.display = "block"
+
+        setTimeout(() => {
+            $('.cart-show__info')[0].style.display = "none"
+        }, 5000);
+
+        $.post('api/cart.php', {
+            "proId":id
+        }, function(data){
+            $('.cart-show__info').html(data)
+        })
+    }
 </script>

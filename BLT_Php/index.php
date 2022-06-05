@@ -4,6 +4,7 @@ include_once('layouts/header.php');
 <style>
     <?php
     include_once('css/base.css');
+    include_once('css/products.css');
     ?>
 </style>
 <div class="content">
@@ -59,7 +60,7 @@ include_once('layouts/header.php');
                     <div>
                         <img src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/product_block_03.jpg" alt="">
                     </div>
-                    <a href="">
+                    <a href="../BLT_Php/man_products.php">
                         <div class="show-product">
                             Xem sản phẩm
                         </div>
@@ -72,7 +73,7 @@ include_once('layouts/header.php');
                     <div>
                         <img src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/product_block_05.jpg" alt="">
                     </div>
-                    <a href="">
+                    <a href="../BLT_Php/women_products.php">
                         <div class="show-product">
                             Xem sản phẩm
                         </div>
@@ -85,7 +86,7 @@ include_once('layouts/header.php');
                     <div>
                         <img src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/product_block_07.jpg" alt="">
                     </div>
-                    <a href="">
+                    <a href="../BLT_Php/children_products.php">
                         <div class="show-product">
                             Xem sản phẩm
                         </div>
@@ -109,7 +110,7 @@ include_once('layouts/header.php');
                                 <div class="d-flex justify-content-center flex-md-column align-items-center p-4">
                                     <a href = "product_details.php?id=' . $item['id'] . '" class="card-title">' . $item['title'] . '</a>
                                     <div class = "price my-1">' . number_format($item['price'], 0, ',', '.') . 'đ</div>
-                                    <a href="#" class="add-cart">Thêm vào giỏ</a>
+                                    <a onclick = "addCart('.$item['id'].')" class="add-cart">Thêm vào giỏ</a>
                                 </div>
                         </div>          
                         ';
@@ -147,7 +148,7 @@ include_once('layouts/header.php');
                                 <div class="d-flex justify-content-center flex-md-column align-items-center p-4">
                                     <a class="card-title">' . $item['title'] . '</a>
                                     <div class = "price my-1">' . number_format($item['price'], 0, ',', '.') . 'đ</div>
-                                    <a href="#" class="add-cart">Thêm vào giỏ</a>
+                                    <a class="add-cart" onclick = "addCart('.$item['id'].')">Thêm vào giỏ</a>
                                 </div>
                         </div>          
                         ';

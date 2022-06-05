@@ -64,10 +64,10 @@ if(!empty($_POST)){
                         <div class="num-product">1</div>
                         <div class="detail-btn-increase">+</div>
                     </div>
-                    <div class="detail-add__cart">
+                    <a href="../BLT_Php/cart.php" class="detail-add__cart">
                         <i class="fa-solid fa-cart-plus"></i>
                         THÊM VÀO GIỎ
-                    </div>
+                    </a>
                 </div>
                 <div class="detail-pay">
                     <div class="row m-4">
@@ -198,7 +198,7 @@ if(!empty($_POST)){
             <div class="title-product">SẢN PHẨM TƯƠNG TỰ</div>
             <div class="slider autoplay">
                 <?php
-                $sql = "select *from product where category_id = 3 and id != $id limit 8";
+                $sql = "select *from product where category_id = $cate_id and id != $id limit 8";
                 $productList = executeResult($sql);
                 foreach ($productList as $item) {
                     echo '
@@ -209,7 +209,7 @@ if(!empty($_POST)){
                                 <div class="d-flex justify-content-center flex-md-column align-items-center p-4">
                                     <a href = "product_details.php?id=' . $item['id'] . '" class="card-title">' . $item['title'] . '</a>
                                     <div class = "price my-1">' . number_format($item['price'], 0, ',', '.') . 'đ</div>
-                                    <a href="#" class="add-cart">Thêm vào giỏ</a>
+                                    <a class="add-cart" onclick = "addCart('.$item['id'].')">Thêm vào giỏ</a>
                                 </div>
                         </div>          
                         ';

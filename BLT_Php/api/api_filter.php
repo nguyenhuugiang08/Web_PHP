@@ -5,9 +5,10 @@ require_once('../utils/utility.php');
 if (!empty($_POST)) {
     $valueRangeMin = getPOST('valueRangeMin');
     $valueRangeMax = getPOST('valueRangeMax');
+    $type = getPOST('type');
 }
 
-$sql = "select *from product where category_id = 2 and price >= $valueRangeMin and price <= $valueRangeMax limit 12";
+$sql = "select *from product where category_id = $type and price >= $valueRangeMin and price <= $valueRangeMax and deleted = 0 limit 12";
 $productList = executeResult($sql);
 
 foreach ($productList as $item) {

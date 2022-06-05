@@ -157,3 +157,30 @@ input::-webkit-slider-thumb {
 .women-product__detail:hover {
     box-shadow: 0 3px 6px -4px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
 }
+
+/* pagination */
+#pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.page-link {
+    padding: 4px 12px;
+    border-radius: 50% !important;
+    border: 2px solid #353535;
+    color: #353535;
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+.page-link:hover {
+    cursor: pointer;
+    background-color: #c30005;
+    border: 2px solid #353535;
+    color: #fff;
+}
+
+.active-link {
+    background-color: #c30005;
+    color: #fff;
+}

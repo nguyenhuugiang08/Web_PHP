@@ -12,7 +12,7 @@ if(!empty($_GET)){
     $index = ((int)$page -1)*6;
 }
 
-$sql = "SELECT * FROM product limit $index,6";
+$sql = "SELECT * FROM product where deleted = 0 limit $index,6";
 $listProduct = executeResult($sql);
 
 include_once('../layout/admin_header.php');

@@ -4,24 +4,25 @@ require_once('../utils/utility.php');
 
 if (!empty($_POST)) {
     $payload = getPOST('payload');
+    $type = getPOST('type');
 }
 
 
 if ($payload == 0) {
-    $sql = "select *from product where category_id = 2 limit 12 ";
+    $sql = "select *from product where category_id = $type and deleted = 0 limit 12 ";
     $productList = executeResult($sql);
 }
 if ($payload == 1) {
     $sql = "select `id`, `category_id`, `title`, `price`, `discount`, `thumbnail`, `description`, date(`created_at`), `updated_at`, `deleted` 
-    from product where category_id = 2 order by created_at desc limit 12 ";
+    from product where category_id = $type and deleted = 0 order by created_at desc limit 12 ";
     $productList = executeResult($sql);
 }
 if ($payload == 2) {
-    $sql = "select *from product where category_id = 2 order by price asc limit 12 ";
+    $sql = "select *from product where category_id = $type and deleted = 0 order by price asc limit 12 ";
     $productList = executeResult($sql);
 }
 if ($payload == 3) {
-    $sql = "select *from product where category_id = 2 order by price desc limit 12 ";
+    $sql = "select *from product where category_id = $type and deleted = 0 order by price desc limit 12 ";
     $productList = executeResult($sql);
 }
 foreach ($productList as $item) {
