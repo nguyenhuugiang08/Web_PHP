@@ -155,9 +155,24 @@
         }, 5000);
 
         $.post('api/cart.php', {
-            "proId":id
+            "action": "addCart",
+            "proId":id,
+            "num":1
         }, function(data){
             $('.cart-show__info').html(data)
+            location.reload()
         })
     }
+    function deleteProductCart(id) {
+        $.post('api/cart.php', {
+            "action":"deleteCart",
+            "deleteId":id
+        }, function(data){
+            $('.cart-show__info').html(data)
+            location.reload()
+        })
+    }
+
+   
+    
 </script>

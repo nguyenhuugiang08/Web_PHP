@@ -224,7 +224,7 @@ require_once('layouts/footer.php');
 ?>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
-    let decreaseElement = document.querySelector('.detail-btn-decrease')
+     let decreaseElement = document.querySelector('.detail-btn-decrease')
     let increaseElement = document.querySelector('.detail-btn-increase')
     let numElement = document.querySelector('.num-product')
 
@@ -240,10 +240,10 @@ require_once('layouts/footer.php');
         numElement.innerHTML = content
     }
 
-    let deAdditionElement = document.querySelector('.detail-addition')
-    let deFeedbackElement = document.querySelector('.detail-feedback')
-    let additionElement = document.querySelector('.addition')
-    let feedbackElement = document.querySelector('.feedback')
+    let deAdditionElement = document.querySelectorAll('.detail-addition')
+    let deFeedbackElement = document.querySelectorAll('.detail-feedback')
+    let additionElement = document.querySelectorAll('.addition')
+    let feedbackElement = document.querySelectorAll('.feedback')
 
     deAdditionElement.onclick = () => {
         additionElement.style.display = "block"
@@ -271,7 +271,5 @@ require_once('layouts/footer.php');
 
     btnPrevElement.innerHTML = '<i class="fa-solid fa-angle-left"></i>'
     btnNextElement.innerHTML = '<i class="fa-solid fa-angle-right"></i>'
-  
 </script>
-
 </html>

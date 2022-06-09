@@ -21,7 +21,7 @@ if (!empty($_POST)) {
 
 
 
-    $sql = 'select *from user, role where email="' . $email . '" and password = "' . $password . '" and role.id = user.role_id';
+    $sql = 'select *from user, role where email="' . $email . '" and password = "' . $password . '" and role.id = user.role_id and deleted = 0';
     $user = executeResultOne($sql);
     if (isset($user['name']) && $user['name'] == "Admin") {
         header('Location: ../Admin/home/index.php');

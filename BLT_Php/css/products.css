@@ -184,3 +184,7 @@ input::-webkit-slider-thumb {
     background-color: #c30005;
     color: #fff;
 }
+
+.form-select:focus {
+    box-shadow: none !important;
+}

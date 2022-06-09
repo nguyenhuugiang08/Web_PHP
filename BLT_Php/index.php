@@ -4,7 +4,6 @@ include_once('layouts/header.php');
 <style>
     <?php
     include_once('css/base.css');
-    include_once('css/products.css');
     ?>
 </style>
 <div class="content">
@@ -99,7 +98,7 @@ include_once('layouts/header.php');
                 PHỤ KIỆN KHÁC
             </div>
             <?php
-            $sql = "select *from product where category_id = 3 limit 8";
+            $sql = "select *from product where category_id = 3 and deleted = 0 limit 8";
             $productList = executeResult($sql);
             foreach ($productList as $item) {
                 echo '
@@ -136,10 +135,10 @@ include_once('layouts/header.php');
         </div>
         <div class="row">
             <div class="title-product">
-                SẢN PHẨM GIẢM GIÁ
+                SẢN PHẨM NỮ
             </div>
             <?php
-            $sql = "select *from product where category_id = 3 limit 8";
+            $sql = "select *from product where category_id = 2 and deleted = 0 limit 8";
             $productList = executeResult($sql);
             foreach ($productList as $item) {
                 echo '
@@ -156,7 +155,6 @@ include_once('layouts/header.php');
             ?>
         </div>
     </div>
-
 </div>
 
 <?php

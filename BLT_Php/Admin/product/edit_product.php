@@ -90,7 +90,7 @@ require_once('../layout/admin_header.php');
                                 <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
                             </div>
                             <div id="thumbbox">
-                                <img height="300" width="300" alt="Thumb image" id="thumbimage" src="<?=$data_product['thumbnail']?>"  />
+                                <img height="300" width="300" alt="Thumb image" id="thumbimage" src="../../images/<?=$data_product['thumbnail']?>"  />
                                 <a class="removeimg" href="javascript:"></a>
                             </div>
                             <div id="boxchoice">
@@ -140,7 +140,7 @@ require_once('../layout/admin_header.php');
 
         });
         $(".removeimg").click(function() {
-            $("#thumbimage").attr('src', '<?=$data_product['thumbnail']?>');
+            $("#thumbimage").attr('src', '../../images/<?=$data_product['thumbnail']?>');
             $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
             $(".removeimg").hide();
             $(".Choicefile").bind('click', function() {

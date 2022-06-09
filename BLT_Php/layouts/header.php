@@ -53,41 +53,80 @@ session_start();
                         <input type="text" class="header-search__input" style="width: 100%;">
                         <button class="btn btn-danger"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
-                    <div class="header-account">
-                        <a class="header-cart d-flex" href="../../BLT_Php/cart.php">
+                    <div class="header-account py-2">
+                        <a class="header-cart d-flex" href="../../BLT_Php/order.php">
                             <div class="header-cart__info">
                                 <span>GIỎ HÀNG/</span>
-                                <span>0đ</span>
+                                <span class="total">
+                                    <?php
+                                    $total = 0;
+
+                                    if (isset($_SESSION['cart'])) {
+                                        foreach ($_SESSION['cart'] as $item) {
+                                            $total += (int)$item['num'] * (float)$item['price'];
+                                        }
+                                    }
+                                    echo number_format($total, 0, ',', '.') . "đ";
+                                    ?>
+                                </span>
                             </div>
                             <div class="header-cart__icon ms-3">
                                 <i class="fa-solid fa-cart-shopping"></i>
+                                <div class="num-product">
+                                    <?php
+                                    $sum = 0;
+                                    if (isset(($_SESSION['cart']))) {
+                                        foreach ($_SESSION['cart'] as $item) {
+                                            $sum += (int)$item['num'];
+                                        }
+                                    }
+                                    echo $sum;
+                                    ?>
+                                </div>
                             </div>
                         </a>
                         <div class="cart-show__info">
                             <?php
-                                if(!isset($_SESSION['cart'])){
-                                    echo '
+                            if (!isset(($_SESSION['cart']))) {
+                                echo '
                                     <div class="cart-show__info-img"></div>
                                     Chưa có sản phẩm nào trong giỏ
                                     ';
-                                    var_dump($_SESSION['cart']);
-                                }else {
-                                    foreach($_SESSION['cart'] as $item){
+                            } else {
+                                $sum = 0;
+                                if (isset(($_SESSION['cart']))) {
+                                    foreach ($_SESSION['cart'] as $item) {
                                         echo '
                                         <ul class="demo-product__list">
-                                        <li class="demo-product__item">
-                                            <a href = "product_details.php?id=' . $item['id'] . '" class="demo-product__link">
-                                                <img src="images/' . $item['thumbnail'] . '" class = "demo-product__img me-4" alt="">
-                                                <div>
-                                                    <div class ="demo-product__title">' . $item['title'] . '</div>
-                                                    <div>' . number_format($item['price'], 0, ',', ',') . 'đ</div>
+                                            <li class="demo-product__item d-flex justify-content-between align-items-center">
+                                                <a href = "product_details.php?id=' . $item['id'] . '" class="demo-product__link">
+                                                    <img src="images/' . $item['thumbnail'] . '" class = "demo-product__img me-4" alt="">
+                                                    <div>
+                                                        <div class ="demo-product__title">' . $item['title'] . '</div>
+                                                        <div>' . $item['num'] . ' x ' . number_format($item['price'], 0, ',', ',') . 'đ</div>
+                                                    </div>
+                                                </a>
+                                                <div class = "cart-cancel" onclick = "deleteProductCart(' . $item['id'] . ')">
+                                                    <i class="fa-solid fa-xmark"></i>
                                                 </div>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                            </li>
+                                        </ul>
                                         ';
+                                        $sum += (int)$item['num'] * (float)$item['price'];
                                     }
+                                    echo '
+                                        <div class = "my-3 ms-3">
+                                           <strong> TỔNG: ' . number_format($sum, 0, ',', ',') . 'đ</strong>
+                                        </div>
+                                        <a href = "order.php" class ="show-order">
+                                            XEM GIỎ HÀNG
+                                        </a>
+                                        <a href = "pay.php" class ="show-pay mt-2">
+                                            THANH TOÁN
+                                        </a>
+                                    ';
                                 }
+                            }
                             ?>
                         </div>
                     </div>

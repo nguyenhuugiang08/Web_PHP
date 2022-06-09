@@ -1,0 +1,125 @@
+.order-main {
+    margin-top: 216px;
+}
+
+.order-title::after {
+    position: relative;
+    content: "";
+    display: block;
+    height: 4px;
+    width: 94%;
+    background-color: #ddd;
+    bottom: -10px;
+}
+
+.detail-num {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.detail-btn-decrease {
+    border: 1px solid #a4a4a4;
+    border-radius: 5px 0 0 5px;
+    padding: 4px 10px;
+    background-color: #F9F9F9;
+    cursor: pointer;
+}
+
+.num-product {
+    padding: 4px 12px;
+    border: 1px solid #a4a4a4;
+}
+
+.detail-btn-increase {
+    border: 1px solid #a4a4a4;
+    border-radius: 0 5px 5px 0;
+    padding: 4px 10px;
+    background-color: #F9F9F9;
+    cursor: pointer;
+}
+
+.order-product::after {
+    position: relative;
+    content: "";
+    display: block;
+    height: 1px;
+    width: 94%;
+    background-color: #ddd;
+    bottom: -10px;
+}
+
+.order-product__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.order-product__link {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #353535;
+}
+
+.order-product__link:hover {
+    color: #353535;
+}
+
+.order-product__link-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.order-product__img {
+    width: 80px;
+    height: 80px;
+}
+
+.shiper {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-pay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    background-color: #D26E4B;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-pay:hover {
+    color: #fff;
+}
+
+.order-action {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn-continue {
+    padding: 4px 12px;
+    color: #C30005;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: 1px solid #C30005;
+    margin-right: 24px;
+    text-decoration: none;
+}
+
+.btn-continue:hover {
+    color: #fff;
+    background-color: #C30005;
+}
+
+.order-num {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
