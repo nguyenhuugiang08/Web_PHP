@@ -1,33 +1,34 @@
 <?php
 require_once('../../database/dbhelper.php');
 require_once('../../utils/utility.php');
-$sql = "SELECT * FROM users except SELECT * FROM users where role = 'Admin' limit 7";
+$sql = "SELECT * FROM orders  limit 7";
 $userList = executeResult($sql);
 
 require_once('../layout/admin_header.php');
 ?>
 
 <div class="category">
-    Danh sách người dùng
+    Danh sách hóa đơn
 </div>
 
 <div class="product-process">
     <a href="add_user.php">
-        <button class="btn btn-success"> <i class="fa-solid fa-plus"></i> Tạo người dùng mới</button>
+        <button class="btn btn-success"> <i class="fa-solid fa-plus"></i> Tạo hóa đơn</button>
     </a>
     <div class="cate-products">
-        <table class="table table-hover table-bordered js-copytextarea mt-5" cellpadding="0" cellspacing="0" border="0"
+        <table class="table table-hover align-items-center table-bordered js-copytextarea mt-5" cellpadding="0" cellspacing="0" border="0"
               id="sampleTable">
               <thead>
                 <tr>
                     <th scope="col">STT</th>
                     <th scope="col">Họ tên</th>
-                    <th scope="col">Username</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Phone Number</th>
-                    <th scope="col">Date create</th>
-                    <th scope="col">Date update</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">Ghi chú</th>
+                    <th scope="col">Ngày đặt</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Tổng tiền</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
@@ -40,18 +41,13 @@ require_once('../layout/admin_header.php');
                         <tr>
                             <th scope="row">' . $index++ . '</th>
                             <td>' . $item['fullname'] . '</td>
-                            <td>' . $item['username']  . '</td>
-                            <td>' . $item['email'] . '</td>
-                            <td>' . $item['password'] . '</td>
+                            <td>' . $item['email']  . '</td>
                             <td>' . $item['phone_number'] . '</td>
-                            <td>' . $item['create_at'] . '</td>
-                            <td>' . $item['update_at'] . '</td>
-                            <td>
-                                <button class="btn btn-danger d-flex btn-action" onClick="deleteUser(' . $item['id'] . ')">
-                                    <i class="fa-solid fa-trash table-icon"></i>
-                                    Delete
-                                </button>
-                            </td>
+                            <td>' . $item['address'] . '</td>
+                            <td>' . $item['note'] . '</td>
+                            <td>' . $item['order_date'] . '</td>
+                            <td>' . $item['status'] . '</td>
+                            <td>' . $item['total_money'] . '</td>
                             <td>
                                 <a href = "edit_user.php?id= '.$item['id'].'" style = "text-decoration: none;">
                                     <button class="btn btn-warning d-flex btn-action">
@@ -59,6 +55,12 @@ require_once('../layout/admin_header.php');
                                         Edit
                                     </button>
                                 </a>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger d-flex btn-action" onClick="deleteOrder(' . $item['id'] . ')">
+                                    <i class="fa-solid fa-trash table-icon"></i>
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                         ';
@@ -72,7 +74,7 @@ require_once('../layout/admin_header.php');
 </div>
 
 <script>
-    function deleteUser(id) {
+    function deleteOrder(id) {
         var option = confirm('Bạn có chắc chắn muốn xóa người dùng này ? ')
 
         if (!option) {

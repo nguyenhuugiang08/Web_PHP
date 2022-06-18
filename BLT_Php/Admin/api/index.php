@@ -21,5 +21,10 @@ if (!empty($_POST)) {
             $sql = "DELETE FROM category WHERE id = $id";
             execute($sql);
             break;
+        case 'deleteOrder':
+            $id = getPOST('id');
+            $sql = "DELETE FROM category WHERE id = $id";
+            execute($sql);
+            break;
     }
 }

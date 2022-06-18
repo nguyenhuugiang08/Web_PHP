@@ -62,18 +62,18 @@ include_once('../layout/admin_header.php');
                             <td>' . $item['created_at'] . '</td>
                             <td>' . $item['updated_at'] . '</td>
                             <td>
-                                <button class="btn btn-danger d-flex btn-action" onClick="deleteProduct(' . $item['id'] . ')">
-                                    <i class="fa-solid fa-trash table-icon"></i>
-                                    Delete
-                                </button>
-                            </td>
-                            <td>
                                 <a href = "edit_product.php?id= '.$item['id'].'" style = "text-decoration: none;">
                                     <button class="btn btn-warning d-flex btn-action">
                                         <i class="fa-solid fa-pen-to-square table-icon"></i>
                                         Edit
                                     </button>
                                 </a>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger d-flex btn-action" onClick="deleteProduct(' . $item['id'] . ')">
+                                    <i class="fa-solid fa-trash table-icon"></i>
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                         ';
@@ -85,7 +85,7 @@ include_once('../layout/admin_header.php');
 
     <div class="row">
         <div>
-            Hiển thị 7 sản phẩm
+            Hiển thị 6 sản phẩm
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
