@@ -50,10 +50,10 @@ require_once('layouts/header.php');
                             <div class="col-md-2 fw-bold">
                                 ' . number_format($item['price'], 0, ',', ',') . '<ins>đ</ins>
                             </div>
-                            <div class="col-md-2">
-                                <div class="order-num">
-                                    <strong>x' . $item['num'] . '</strong>
-                                </div>
+                            <div class="detail-num col-md-2">
+                                <div class="detail-btn-decrease">-</div>
+                                <div class="num-product">'.$item['num'].'</div>
+                                <div class="detail-btn-increase">+</div>
                             </div>
                             <div class="col-md-2 fw-bold">
                                 ' . number_format((int)$item['num'] * (float)$item['price'], 0, ',', ',') . '<ins>đ</ins>
@@ -68,7 +68,9 @@ require_once('layouts/header.php');
                     <i class="fa-solid fa-arrow-left-long"></i>
                     TIẾP TỤC XEM HÀNG
                 </a>
-
+                <a class="btn-update" onclick="updateCart()">
+                    CẬP NHẬT GIỎ HÀNG
+                </a>
             </div>
         </div>
         <div class="col-md-5 px-4">
@@ -133,5 +135,41 @@ require_once('layouts/header.php');
 <?php
 require_once('layouts/footer.php');
 ?>
+<script>
+    let decreaseElement = document.querySelectorAll('.detail-btn-decrease')
+    let increaseElement = document.querySelectorAll('.detail-btn-increase')
+    let numElement = document.querySelectorAll('.num-product')
+
+    decreaseElement.forEach((element, index) => {
+        element.onclick = () => {
+            if (Number(numElement[index].innerText) > 1) {
+                let content = (Number(numElement[index].innerText) - 1).toString()
+                numElement[index].innerHTML = content
+            }
+        }
+    });
+
+    increaseElement.forEach((element, index) => {
+        element.onclick = () => {
+            let content = (Number(numElement[index].innerText) + 1).toString()
+            numElement[index].innerHTML = content
+        }
+        
+    });
+    
+    function updateCart() {
+        let arrayNum = []
+    
+        numElement.forEach(element => {
+            arrayNum.push(element.innerText)
+        });
+        $.post('api/cart.php', {
+            "action": "updateCart",
+            "arrayNum": arrayNum
+        }, function(data){
+            location.reload()
+        })
+    }
+</script>
 
 </html>

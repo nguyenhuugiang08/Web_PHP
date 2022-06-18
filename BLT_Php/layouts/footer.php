@@ -42,7 +42,7 @@
                     <div class="col-md-6">
                         <ul class="menu-list">
                             <li>
-                                <a href="" class="menu-list__link">Trang chủ</a>
+                                <a href="../../BLT_Php/index.php" class="menu-list__link">Trang chủ</a>
                             </li>
                             <li>
                                 <a href="" class="menu-list__link">Cửa hàng</a>
@@ -148,11 +148,11 @@
     })
 
     function addCart(id) {
-        $('.cart-show__info')[0].style.display = "block"
+        // $('.cart-show__info')[0].style.display = "block"
 
-        setTimeout(() => {
-            $('.cart-show__info')[0].style.display = "none"
-        }, 5000);
+        // setTimeout(() => {
+        //     $('.cart-show__info')[0].style.display = "none"
+        // }, 5000);
 
         $.post('api/cart.php', {
             "action": "addCart",

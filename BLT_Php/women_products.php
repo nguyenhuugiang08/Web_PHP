@@ -109,7 +109,7 @@ $pages = ceil((int)$countId['countId'] / 12);
             <nav id="pagination" aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
-                        <a class="page-link me-1" onclick="prevPage()" aria-label="Previous">
+                        <a class="page-link me-1 <?=$pages == 0 ? "page-link--active" : ""?>" onclick="prevPage()" aria-label="Previous">
                             <span aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
                         </a>
                     </li>

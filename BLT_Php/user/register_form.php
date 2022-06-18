@@ -5,7 +5,7 @@ require_once('handle_register.php');
 ?>
 <style>
     <?php
-        require_once('../css/style.css');
+    require_once('../css/style.css');
     ?>
 </style>
 <!DOCTYPE html>
@@ -34,34 +34,37 @@ require_once('handle_register.php');
 
 <body>
     <div class="overlay">
+        <a class="overlay-return__home" href="../index.php">
+            <i class="fa-solid fa-house-chimney-crack"></i> Trang chủ
+        </a> 
         <div class="register-form">
-        <div class="heading">
-            <h2>Đăng Ký</h2>
-            <a href="index.php" class="login__link">Đăng Nhập</a>
-        </div>
-        <form class="row g-3 needs-validation" novalidate method="post">
-            <div class="col-md-12">
-                <label for="fullname" class="form-label">Fullname</label>
-                <input type="text" class="form-control" id="fullname" name="fullname" value="<?=$fullname?>" required>
-                <div class="invalid-feedback">
-                    Vui lòng nhập họ tên đầy đủ của bạn.
-                </div>
+            <div class="heading">
+                <h2>Đăng Ký</h2>
+                <a href="index.php" class="login__link">Đăng Nhập</a>
             </div>
-            <div class="col-md-12">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" value="<?=$username?>" required>
-                <div class="invalid-feedback">
-                    Vui lòng nhập username.
+            <form class="row g-3 needs-validation" novalidate method="post">
+                <div class="col-md-12">
+                    <label for="fullname" class="form-label">Fullname</label>
+                    <input type="text" class="form-control" id="fullname" name="fullname" value="<?= $fullname ?>" required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập họ tên đầy đủ của bạn.
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?=$email?>" required>
-                <div class="invalid-feedback">
-                    Vui lòng nhập Email.
+                <div class="col-md-12">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" value="<?= $username ?>" required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập username.
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-12">
+                <div class="col-md-12">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<?= $email ?>" required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập Email.
+                    </div>
+                </div>
+                <div class="col-md-12">
                     <label for="password" class="form-label">Password</label>
                     <div class="password-group">
                         <input type="password" class="form-control" id="password" name="password" required>
@@ -73,17 +76,17 @@ require_once('handle_register.php');
                         </div>
                     </div>
                 </div>
-            <div class="col-md-12">
-                <label for="phone_number" class="form-label">Phone number</label>
-                <input type="text" class="form-control" id="phone_number" name="phone_number" value="<?=$phone_number?>" required>
-                <div class="invalid-feedback">
-                    Vui lòng nhập số điện thoại của bạn.
+                <div class="col-md-12">
+                    <label for="phone_number" class="form-label">Phone number</label>
+                    <input type="text" class="form-control" id="phone_number" name="phone_number" value="<?= $phone_number ?>" required>
+                    <div class="invalid-feedback">
+                        Vui lòng nhập số điện thoại của bạn.
+                    </div>
                 </div>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-success" type="submit">Đăng Ký</button>
-            </div>
-        </form>
+                <div class="col-12">
+                    <button class="btn btn-success" type="submit">Đăng Ký</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -116,15 +119,14 @@ require_once('handle_register.php');
         pwdDisplayElement.addEventListener('click', (e) => {
             pwdElement.setAttribute("type", "text")
             e.target.style.display = "none"
-            pwdHidenElement.style.display="block"
+            pwdHidenElement.style.display = "block"
         })
 
         pwdHidenElement.addEventListener('click', (e) => {
             pwdElement.setAttribute("type", "password")
             e.target.style.display = "none"
-            pwdDisplayElement.style.display="block"
+            pwdDisplayElement.style.display = "block"
         })
-
     </script>
 </body>
 

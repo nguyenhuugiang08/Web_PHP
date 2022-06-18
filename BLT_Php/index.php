@@ -109,7 +109,7 @@ include_once('layouts/header.php');
                                 <div class="d-flex justify-content-center flex-md-column align-items-center p-4">
                                     <a href = "product_details.php?id=' . $item['id'] . '" class="card-title">' . $item['title'] . '</a>
                                     <div class = "price my-1">' . number_format($item['price'], 0, ',', '.') . 'đ</div>
-                                    <a onclick = "addCart('.$item['id'].')" class="add-cart">Thêm vào giỏ</a>
+                                    <a onclick = "addCart(' . $item['id'] . ')" class="add-cart">Thêm vào giỏ</a>
                                 </div>
                         </div>          
                         ';
@@ -143,11 +143,13 @@ include_once('layouts/header.php');
             foreach ($productList as $item) {
                 echo '
                         <div class="col-md-3 card-product">
-                                <img src="images/' . $item['thumbnail'] . '" class="card-img-top" alt="...">
+                                <a href = "product_details.php?id=' . $item['id'] . '">
+                                     <img src="images/' . $item['thumbnail'] . '" class="card-img-top" alt="...">
+                                </a>
                                 <div class="d-flex justify-content-center flex-md-column align-items-center p-4">
-                                    <a class="card-title">' . $item['title'] . '</a>
+                                    <a href="product_details.php?id=' . $item['id'] . '" class="card-title">' . $item['title'] . '</a>
                                     <div class = "price my-1">' . number_format($item['price'], 0, ',', '.') . 'đ</div>
-                                    <a class="add-cart" onclick = "addCart('.$item['id'].')">Thêm vào giỏ</a>
+                                    <a class="add-cart" onclick = "addCart(' . $item['id'] . ')">Thêm vào giỏ</a>
                                 </div>
                         </div>          
                         ';

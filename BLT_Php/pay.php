@@ -1,5 +1,6 @@
 <?php
 require_once('layouts/header.php');
+session_start();
 ?>
 
 <style>
@@ -33,7 +34,7 @@ require_once('layouts/header.php');
                 <input class="billing_address_2" name="" type="hidden" value="">
                 <div class="col-md-12">
                     <label for="address" class="form-label mb-3"><strong>Địa chỉ</strong></label>
-                    <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+                    <input type="text" class="form-control" id="address">
                 </div>
                 <div class="col-12">
                     <label for="phone_number" class="form-label mb-3"><strong>Số điện thoại</strong></label>
@@ -121,7 +122,7 @@ require_once('layouts/header.php');
                     </div>
                 </div>
             </div>
-            <a href="#" class="btn-order mt-5" onclick="addOrder()">ĐẶT HÀNG</a>
+            <a class="btn-order mt-5" <?= $_SESSION['login'] == "Successfully" ? "onclick='addOrder(" . $_SESSION['userId'] . ")'" : "href='user/index.php'" ?>>ĐẶT HÀNG</a>
         </div>
     </div>
 </div>
@@ -221,17 +222,21 @@ require_once('layouts/footer.php');
         })
     })
 
-    function addOrder() {
-        $.post('api/order.php', {
-            "action": "addOrder",
-            "user_id":  1,
-            "name": $('#name')[0].value,
-            "address": $('#address')[0].value,
-            "phone_number": $('#phone_number')[0].value,
-            "email": $('#email')[0].value,
-            "description": $('#description')[0].value,
-        }, function(data){
-
-        })
+    function addOrder(id) {
+    if($('#name')[0].value !== '' && $('#address')[0].value !== '' && $('#phone_number')[0].value !== '' && $('#email')[0].value !== ''){
+            $.post('api/order.php', {
+                "action": "addOrder",
+                "user_id": id,
+                "name": $('#name')[0].value,
+                "address": $('#address')[0].value,
+                "phone_number": $('#phone_number')[0].value,
+                "email": $('#email')[0].value,
+                "description": $('#description')[0].value,
+            }, function(data) {
+                location.reload()
+                alert(data)
+            })
+        }else alert('Bạn cần nhập đầy đủ thông tin.')
     }
+
 </script>

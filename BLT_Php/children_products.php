@@ -86,7 +86,7 @@ $pages = ceil((int)$countId['countId'] / 12);
         <div class="col-md-9">
             <div class="row" id="wapper-products">
                 <?php
-                $sql = "select *from product where category_id = 5 limit 12 ";
+                $sql = "select *from product where category_id = 5 and deleted = 0 limit 12 ";
                 $productList = executeResult($sql);
                 foreach ($productList as $item) {
                     echo '
@@ -109,7 +109,7 @@ $pages = ceil((int)$countId['countId'] / 12);
             <nav id="pagination" aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
-                        <a class="page-link me-1" onclick="prevPage()" aria-label="Previous">
+                        <a class="page-link me-1 <?=$pages == 0 ? "page-link--active" : ""?>" onclick="prevPage()" aria-label="Previous">
                             <span aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
                         </a>
                     </li>
@@ -122,7 +122,7 @@ $pages = ceil((int)$countId['countId'] / 12);
                     }
                     ?>
                     <li class="page-item">
-                        <a class="page-link"  onclick="nextPage()" aria-label="Next">
+                        <a class="page-link <?=$pages == 0 ? "page-link--active" : ""?>"  onclick="nextPage()" aria-label="Next">
                             <span aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
                         </a>
                     </li>

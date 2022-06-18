@@ -1,3 +1,5 @@
+
+
 .women-main {
     margin-top: 216px;
 }
@@ -171,6 +173,10 @@ input::-webkit-slider-thumb {
     color: #353535;
     font-size: 1em;
     font-weight: bolder;
+}
+
+.page-link--active {
+    display: none;
 }
 
 .page-link:hover {

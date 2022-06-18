@@ -8,6 +8,7 @@ if (!empty($_POST)) {
     $proId = getPOST('proId');
     $num = getPOST('num');
     $deleteId = getPOST('deleteId');
+    $arrayNum = getPOST('arrayNum');
 
     $cart = [];
     if (isset($_SESSION['cart'])) {
@@ -47,6 +48,11 @@ if (!empty($_POST)) {
             //update session
             $_SESSION['cart'] = $cart;
             break;
+        case 'updateCart':
+            for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+                $_SESSION['cart'][$i]['num'] = $arrayNum[$i];
+            }
+            break;
     }
 }
 $sum = 0;
@@ -72,7 +78,7 @@ foreach ($_SESSION['cart'] as $item) {
 }
 echo '
     <div>
-        TỔNG: '.number_format($sum, 0, ',', ',').'đ
+        TỔNG: ' . number_format($sum, 0, ',', ',') . 'đ
     </div>
     <a href = "order.php" class ="show-order">
         XEM GIỎ HÀNG

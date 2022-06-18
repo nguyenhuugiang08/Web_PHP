@@ -6,7 +6,7 @@ require_once('handle_login.php');
 ?>
 <style>
     <?php
-        require_once('../css/style.css');
+    require_once('../css/style.css');
     ?>
 </style>
 
@@ -36,6 +36,9 @@ require_once('handle_login.php');
 
 <body>
     <div class="overlay ">
+        <a class="overlay-return__home" href="../index.php">
+            <i class="fa-solid fa-house-chimney-crack"></i> Trang chủ
+        </a>
         <div class="login-form d-flex">
             <div class="login-form__bg">
                 <img src="../images/team.jpg" alt="" class="login-form__img">

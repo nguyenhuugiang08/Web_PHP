@@ -13,6 +13,22 @@
     border-bottom-left-radius: 100%;
 }
 
+.overlay-return__home {
+    position: absolute;
+    color: #001C41;
+    right: 32px;
+    top: 32px;
+    background-color: #FFD43B;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.overlay-return__home:hover {
+    color: #001C41;
+}
+
 .password-group {
     position: relative;
 }
