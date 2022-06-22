@@ -148,12 +148,6 @@
     })
 
     function addCart(id) {
-        // $('.cart-show__info')[0].style.display = "block"
-
-        // setTimeout(() => {
-        //     $('.cart-show__info')[0].style.display = "none"
-        // }, 5000);
-
         $.post('api/cart.php', {
             "action": "addCart",
             "proId":id,

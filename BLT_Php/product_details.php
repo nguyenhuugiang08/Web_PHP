@@ -57,20 +57,27 @@ if (!empty($_POST)) {
             <div class="detail-price">
                 <?= number_format($product['price'], 0, ',', '.') ?>đ
             </div>
-            <div class="detail-action">
-                <div class="detail-num">
-                    <div class="me-3">Số Lượng:</div>
-                    <div class="detail-btn-decrease">-</div>
-                    <div class="num-product">1</div>
-                    <div class="detail-btn-increase">+</div>
+
+            <div class="d-flex justify-content-start align-items-center mt-3">
+                <div class="pe-3 border-end border-2">Đánh giá:
+                    <i class="fa-solid fa-star" style="color: #c30005;"></i>
+                    <i class="fa-solid fa-star" style="color: #c30005;"></i>
+                    <i class="fa-solid fa-star" style="color: #c30005;"></i>
+                    <i class="fa-solid fa-star" style="color: #c30005;"></i>
+                    <i class="fa-regular fa-star"></i>
                 </div>
-                <a href="../BLT_Php/cart.php" class="detail-add__cart">
-                    <i class="fa-solid fa-cart-plus"></i>
-                    THÊM VÀO GIỎ
-                </a>
+                <div class="ms-3"><strong>Đã bán: </strong> <?= 10000 - $product['quantility'] ?> sản phẩm.</div>
+            </div>
+            <div class="detail-type d-flex justify-content-start align-items-center mt-2">
+                <div class="detail-type__item me-3">
+                    Mã: <?= $product['id'] ?>
+                </div>
+                <div class="detail-type__item">
+                    Danh mục: <?= $category['name'] ?>
+                </div>
             </div>
             <div class="detail-pay">
-                <div class="row m-4">
+                <div class="row my-4">
                     <div class="col-md-6">
                         <div class="detail-pay__title">Tính phí ship tự động</div>
                     </div>
@@ -117,16 +124,21 @@ if (!empty($_POST)) {
                     </div>
                 </div>
             </div>
-            <div class="detail-pay__para">Hãy trở thành Affilicate của chúng tôi để tìm thêm thu nhập thụ động, kiếm tiền online</div>
-            <div class="btn-register__aff">Đăng ký Affilicate</div>
-            <div class="detail-type">
-                <div class="detail-type__item">
-                    Mã: <?= $product['id'] ?>
+            <div class="detail-action mb-2">
+                <div class="detail-num">
+                    <div class="me-3">Số Lượng:</div>
+                    <div class="detail-btn-decrease">-</div>
+                    <input class="num-product" value="1" />
+                    <div class="detail-btn-increase">+</div>
                 </div>
-                <div class="detail-type__item">
-                    Danh mục: <?= $category['name'] ?>
-                </div>
+                <div class="ms-4"><?= $product['quantility'] ?> sản phẩm có sẫn</div>
             </div>
+            <div class="regex-num mb-4"></div>
+            <a onclick="addCart(<?= $id ?>)" class="detail-add__cart mb-4">
+                <i class="fa-solid fa-cart-plus"></i>
+                THÊM VÀO GIỎ
+            </a>
+
         </div>
     </div>
     <div class="row detail-additional">
@@ -187,7 +199,7 @@ if (!empty($_POST)) {
                     </div>
                     <div class="form-group col-md-12 mb-5">
                         <label class="control-label">Nhận xét của bạn</label>
-                        
+
                         <div id="editor">
                             <textarea class="form-control mt-2" required name="evaluate" rows="5"></textarea>
                         </div>
@@ -230,17 +242,37 @@ require_once('layouts/footer.php');
     let decreaseElement = document.querySelector('.detail-btn-decrease')
     let increaseElement = document.querySelector('.detail-btn-increase')
     let numElement = document.querySelector('.num-product')
+    let regexNumElement = document.querySelector('.regex-num')
+
+    numElement.oninput = () => {
+
+        if (Number(numElement.value) > <?= $product['quantility'] ?>) {
+            numElement.value = (<?= $product['quantility'] ?>)
+            regexNumElement.innerHTML = "Số lượng bạn chọn đã đạt mức tối đa của sản phẩm này"
+            regexNumElement.style.color = 'red'
+        } else {
+            regexNumElement.innerHTML = ""
+        }
+    }
 
     decreaseElement.onclick = () => {
-        if (Number(numElement.innerText) > 1) {
-            let content = (Number(numElement.innerText) - 1).toString()
-            numElement.innerHTML = content
+        if (Number(numElement.value) > 1) {
+            let content = (Number(numElement.value) - 1).toString()
+            numElement.value = content
+            regexNumElement.innerHTML = ""
         }
     }
 
     increaseElement.onclick = () => {
-        let content = (Number(numElement.innerText) + 1).toString()
-        numElement.innerHTML = content
+        if (Number(numElement.value) < <?= $product['quantility'] ?>) {
+            let content = (Number(numElement.value) + 1).toString()
+            numElement.value = content
+            regexNumElement.innerHTML = ""
+        }
+        else {
+            regexNumElement.innerHTML = "Số lượng bạn chọn đã đạt mức tối đa của sản phẩm này"
+            regexNumElement.style.color = 'red'
+        }
     }
 
     let deAdditionElement = document.querySelector('.detail-addition')
@@ -275,16 +307,16 @@ require_once('layouts/footer.php');
     btnPrevElement.innerHTML = '<i class="fa-solid fa-angle-left"></i>'
     btnNextElement.innerHTML = '<i class="fa-solid fa-angle-right"></i>'
 
-    // // edit text
-    // DecoupledEditor.create(document.querySelector("#editor"))
-    //     .then((editor) => {
-    //         const toolbarContainer = document.querySelector("#toolbar-container");
-
-    //         toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     });
+    function addCart(id) {
+        $.post('api/cart.php', {
+            "action": "addCart",
+            "proId": id,
+            "num": Number(numElement.value)
+        }, function(data) {
+            $('.cart-show__info').html(data)
+            location.reload()
+        })
+    }
 </script>
 
 </html>

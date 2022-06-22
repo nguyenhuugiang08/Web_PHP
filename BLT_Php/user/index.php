@@ -2,7 +2,6 @@
 require_once('../database/dbhelper.php');
 require_once('../utils/utility.php');
 require_once('handle_login.php');
-
 ?>
 <style>
     <?php
@@ -48,26 +47,24 @@ require_once('handle_login.php');
                     <h2>Đăng Nhập</h2>
                     <a href="register_form.php" class="register__link">Đăng ký</a>
                 </div>
-                <form class="row g-3 needs-validation" novalidate method="post">
+                <form class="row g-3" method="post">
                     <div class="col-md-12">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control " id="email" name="email" value="<?= isset($_COOKIE['remember']) && $_COOKIE['remember'] == "checked" ?
-                                                                                                        (isset($_COOKIE['email']) ? $_COOKIE['email'] : "") : "" ?>" required>
+                        <input type="email" class="form-control <?= empty($error['email']) ? "" : 'is-invalid' ?> " id="email" name="email" value="<?= empty($error['email']) && isset($_COOKIE['remember']) && $_COOKIE['remember'] == "checked" ?
+                                                                                                                                                        (isset($_COOKIE['email']) ? $_COOKIE['email'] : "$email") : "$email" ?>">
                         <div class="invalid-feedback">
-                            Vui lòng nhập Email.
-                            <!-- <?= empty($error['email']) ? $error['email'] : "" ?> -->
+                            <?= empty($error['email']) ? "" : $error['email'] ?>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <label for="password" class="form-label">Password</label>
                         <div class="password-group">
-                            <input type="password" class="form-control" id="password" name="password" value="<?= isset($_COOKIE['remember']) && $_COOKIE['remember'] == "checked" ?
-                                                                                                                    (isset($_COOKIE['password']) ? $_COOKIE['password'] : "") : "" ?>" required>
+                            <input type="password" class="form-control <?= empty($error['password']) ? "" : 'is-invalid' ?>" id="password" name="password" value="<?= empty($error['password']) && isset($_COOKIE['remember']) && $_COOKIE['remember'] == "checked" ?
+                                                                                                                                                                        (isset($_COOKIE['password']) ? $_COOKIE['password'] : "") : "" ?>">
                             <i class="fa-solid fa-eye-slash hiden-password"></i>
                             <i class="fa-solid fa-eye display-password"></i>
                             <div class="invalid-feedback">
-                                Vui lòng nhập password.
-                                <!-- <?= empty($error['pwd']) ? $error['pwd'] : "" ?> -->
+                                <?= empty($error['password']) ? "" : $error['password']?>
                             </div>
                         </div>
                     </div>
@@ -86,24 +83,6 @@ require_once('handle_login.php');
     </div>
 
     <script>
-        (() => {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
         // display & hiden password
         let pwdElement = document.querySelector('#password')
         let pwdDisplayElement = document.querySelector('.display-password')

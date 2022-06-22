@@ -2,6 +2,7 @@
 require_once('../database/dbhelper.php');
 require_once('../utils/utility.php');
 require_once('handle_register.php');
+
 ?>
 <style>
     <?php
@@ -36,51 +37,63 @@ require_once('handle_register.php');
     <div class="overlay">
         <a class="overlay-return__home" href="../index.php">
             <i class="fa-solid fa-house-chimney-crack"></i> Trang chủ
-        </a> 
+        </a>
         <div class="register-form">
             <div class="heading">
                 <h2>Đăng Ký</h2>
                 <a href="index.php" class="login__link">Đăng Nhập</a>
             </div>
-            <form class="row g-3 needs-validation" novalidate method="post">
+            <form class="row g-3 " method="post">
                 <div class="col-md-12">
                     <label for="fullname" class="form-label">Fullname</label>
-                    <input type="text" class="form-control" id="fullname" name="fullname" value="<?= $fullname ?>" required>
+                    <input type="text" class="form-control" id="fullname" name="fullname" value="<?= $fullname ?>">
                     <div class="invalid-feedback">
                         Vui lòng nhập họ tên đầy đủ của bạn.
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" value="<?= $username ?>" required>
+                    <label for="name" class="form-label">Username</label>
+                    <input type="text" class="form-control <?= empty($error['username']) ? "" : 'is-invalid' ?>" id="username" aria-describedby="emailHelp" name="username" value="<?= $username ?>" />
                     <div class="invalid-feedback">
-                        Vui lòng nhập username.
+                        <?= empty($error['username']) ? "" : $error['username'] ?>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?= $email ?>" required>
+                    <input type="text" class="form-control <?= empty($error['email']) ? "" : 'is-invalid' ?>" id="email" aria-describedby="emailHelp" name="email" value="<?= $email ?>" />
                     <div class="invalid-feedback">
-                        Vui lòng nhập Email.
+                        <?= empty($error['email']) ? "" : $error['email'] ?>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <label for="password" class="form-label">Password</label>
                     <div class="password-group">
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control <?= empty($error['password']) ? "" : 'is-invalid' ?>" id="password" name="password" value="<?= $password ?>" />
                         <i class="fa-solid fa-eye display-password"></i>
                         <i class="fa-solid fa-eye-slash hiden-password"></i>
                         <div class="invalid-feedback">
-                            Vui lòng nhập password.
-                            <!-- <?= empty($error['pwd']) ? $error['pwd'] : "" ?> -->
+                            <?= empty($error['password']) ? "" : $error['password'] ?>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="phone_number" class="form-label">Phone number</label>
-                    <input type="text" class="form-control" id="phone_number" name="phone_number" value="<?= $phone_number ?>" required>
-                    <div class="invalid-feedback">
-                        Vui lòng nhập số điện thoại của bạn.
+                    <label for="password" class="form-label">Xác minh mật khẩu</label>
+                    <div class="password-group">
+                        <input type="password" class="form-control <?= empty($error['confirmPassword']) ? "" : 'is-invalid' ?>" id="password" name="confirmPassword" value="<?= $confirmPassword ?>" />
+                        <i class="fa-solid fa-eye display-password"></i>
+                        <i class="fa-solid fa-eye-slash hiden-password"></i>
+                        <div class="invalid-feedback">
+                            <?= empty($error['confirmPassword']) ? "" : $error['confirmPassword'] ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="mb-4">
+                        <label for="phone" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control <?= empty($error['phone_number']) ? "" : 'is-invalid' ?>" id="phone" name="phone_number" value="<?= $phone_number ?>" />
+                        <div class="invalid-feedback">
+                            <?= empty($error['phone_number']) ? "" : $error['phone_number'] ?>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -91,42 +104,29 @@ require_once('handle_register.php');
     </div>
 
     <script>
-        (() => {
-            'use strict'
+        let pwdElement = document.querySelectorAll('#password')
+        let pwdDisplayElement = document.querySelectorAll('.display-password')
+        let pwdHidenElement = document.querySelectorAll('.hiden-password')
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
+        pwdElement.forEach(element => {
+            element.style.backgroundImage = "none";
+        });
 
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
+        pwdDisplayElement.forEach((element, index) => {
+            element.addEventListener('click', (e) => {
+                pwdElement[index].setAttribute("type", "text")
+                e.target.style.display = "none"
+                pwdHidenElement[index].style.display = "block"
             })
-        })()
+        });
 
-        let pwdElement = document.querySelector('#password')
-        let pwdDisplayElement = document.querySelector('.display-password')
-        let pwdHidenElement = document.querySelector('.hiden-password')
-
-        pwdElement.style.backgroundImage = "none";
-
-        pwdDisplayElement.addEventListener('click', (e) => {
-            pwdElement.setAttribute("type", "text")
-            e.target.style.display = "none"
-            pwdHidenElement.style.display = "block"
-        })
-
-        pwdHidenElement.addEventListener('click', (e) => {
-            pwdElement.setAttribute("type", "password")
-            e.target.style.display = "none"
-            pwdDisplayElement.style.display = "block"
-        })
+        pwdHidenElement.forEach((element, index) => {
+            element.addEventListener('click', (e) => {
+                pwdElement[index].setAttribute("type", "password")
+                e.target.style.display = "none"
+                pwdDisplayElement[index].style.display = "block"
+            })
+        });
     </script>
 </body>
 

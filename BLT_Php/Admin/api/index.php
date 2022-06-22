@@ -21,9 +21,14 @@ if (!empty($_POST)) {
             $sql = "DELETE FROM category WHERE id = $id";
             execute($sql);
             break;
-        case 'deleteOrder':
+        case 'confirmStatus':
             $id = getPOST('id');
-            $sql = "DELETE FROM category WHERE id = $id";
+            $sql = "UPDATE `orders` SET `status`= 1 WHERE id = $id";
+            execute($sql);
+            break;
+        case 'updateStatus':
+            $id = getPOST('id');
+            $sql = "UPDATE `orders` SET `status`= 2 WHERE id = $id";
             execute($sql);
             break;
     }

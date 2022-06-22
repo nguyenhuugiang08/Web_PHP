@@ -13,22 +13,21 @@ if (!empty($_POST)) {
     $password = getPOST('password');
     $remember = getPOST('checkbox_remember');
 
-    // if(!preg_match($emailRegex, $email)){
-    //     $error['email'] = "Email phải có dạng A@gmail.com.";
-    // }
-    // if(!preg_match($passwordRegex, $password)){
-    //     $error['pwd'] = "Mật khẩu tối thiểu 8 ký tự, ít nhất một chữ cái, một số và một ký tự đặc biệt.";
-    // }
+    if (!preg_match($emailRegex, $email)) {
+        $error['email'] = "Email phải có dạng A@gmail.com.";
+    }
+    if (!preg_match($passwordRegex, $password)) {
+        $error['password'] = "Mật khẩu tối thiểu 8 ký tự, ít nhất một chữ cái, một số và một ký tự đặc biệt.";
+    }
 
-
-
-    $sql = 'select *from user, role where email="' . $email . '" and password = "' . $password . '" and role.id = user.role_id and deleted = 0';
-    $user = executeResultOne($sql);
-    if (isset($user['name']) && $user['name'] == "Admin") {
-        header('Location: ../Admin/home/index.php');
-        die();
-    } else {
-        if (isset($user['email']) && $user['email'] == $email && $user['password'] == $password) {
+    if (empty($error)) {
+        $sql = 'select *from user, role where email="' . $email . '" and password = "' . $password . '" and role.id = user.role_id and deleted = 0';
+        $user = executeResultOne($sql);
+        if (isset($user['name']) && $user['name'] == "Admin") {
+            header('Location: ../Admin/home/index.php');
+            die();
+        } else 
+            if (isset($user['email']) && $user['email'] == $email && $user['password'] == $password) {
             setcookie('email', $email, time() + 30 * 24 * 60 * 60, '/');
             setcookie('password', $password, time() + 30 * 24 * 60 * 60, '/');
             if ($remember == "checked") {
@@ -42,11 +41,12 @@ if (!empty($_POST)) {
             $sql = 'select user.id as userId from user, role where email="' . $email . '" and password = "' . $password . '" and role.id = user.role_id and deleted = 0';
             $userId = executeResultOne($sql);
             $_SESSION['userId'] = $userId['userId'];
-            
+
             header('Location: ../index.php');
             die();
         } else {
-            echo '<script>alert("Sai mật khẩu hoặc email. Vui lòng nhập lại!")</script>';
+            $error['email'] = "Email hoặc mật khẩu không đúng";
+            $error['password'] = "Email hoặc mật khẩu không đúng";
         }
     }
 }

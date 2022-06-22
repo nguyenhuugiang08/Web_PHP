@@ -48,11 +48,12 @@ require_once('layouts/header.php');
                                 </div>
                             </div>
                             <div class="col-md-2 fw-bold">
-                                ' . number_format($item['price'], 0, ',', ',') . '<ins>đ</ins>
+                                ' . number_format($item['price'], 0, ',', ',') . '<ins>đ</ins> 
                             </div>
                             <div class="detail-num col-md-2">
                                 <div class="detail-btn-decrease">-</div>
-                                <div class="num-product">'.$item['num'].'</div>
+                                <input class="num-product" value ="' . $item['num'] . '"
+                                 quantility= "'.executeResultOne('select *from product where id = '.$item['id'].'')['quantility'].'"></input>
                                 <div class="detail-btn-increase">+</div>
                             </div>
                             <div class="col-md-2 fw-bold">
@@ -140,33 +141,46 @@ require_once('layouts/footer.php');
     let increaseElement = document.querySelectorAll('.detail-btn-increase')
     let numElement = document.querySelectorAll('.num-product')
 
+    numElement.forEach((element, index) => {
+        element.oninput = () => {
+            if (Number(numElement[index].value) > numElement[index].getAttribute('quantility')) {
+                alert("Số lượng bạn chọn đã đạt mức tối đa của sản phẩm này")
+                numElement[index].value = numElement[index].getAttribute('quantility')
+            }
+        }
+    })
+
     decreaseElement.forEach((element, index) => {
         element.onclick = () => {
-            if (Number(numElement[index].innerText) > 1) {
-                let content = (Number(numElement[index].innerText) - 1).toString()
-                numElement[index].innerHTML = content
+            if (Number(numElement[index].value) > 1) {
+                let content = (Number(numElement[index].value) - 1).toString()
+                numElement[index].value = content
             }
         }
     });
 
     increaseElement.forEach((element, index) => {
         element.onclick = () => {
-            let content = (Number(numElement[index].innerText) + 1).toString()
-            numElement[index].innerHTML = content
+            if (Number(numElement[index].value) < numElement[index].getAttribute('quantility')) {
+                let content = (Number(numElement[index].value) + 1).toString()
+                numElement[index].value = content
+            } else {
+                alert("Số lượng bạn chọn đã đạt mức tối đa của sản phẩm này")
+            }
         }
-        
+
     });
-    
+
     function updateCart() {
         let arrayNum = []
-    
+
         numElement.forEach(element => {
-            arrayNum.push(element.innerText)
+            arrayNum.push(element.value)
         });
         $.post('api/cart.php', {
             "action": "updateCart",
             "arrayNum": arrayNum
-        }, function(data){
+        }, function(data) {
             location.reload()
         })
     }

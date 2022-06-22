@@ -54,7 +54,7 @@ session_start();
                                     <div class ="header-avatar__username">' . $userName['username'] . '</div>
                                 </a>
                                 <div class="header-avatar--hover">
-                                    <a class="header-avatar__link pt-2" href="user/index.php">Tài khoản của tôi</a>
+                                    <a class="header-avatar__link pt-2" href="account.php">Tài khoản của tôi</a>
                                     <a class="header-avatar__link pt-2" href="../../BLT_Php/order_details.php">Đơn mua</a>
                                     <a class="header-avatar__link pt-2" href="user/index.php" onclick = "logout()">Đăng xuất</a>
                                 </div>

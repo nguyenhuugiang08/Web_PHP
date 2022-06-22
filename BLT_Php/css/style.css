@@ -90,7 +90,7 @@
     transform: translateY(-50%);
     margin: auto;
     z-index: 1;
-    width: 500px;
+    width: 600px;
     background-color: #fff;
     border-radius: 5px;
     overflow: hidden;
@@ -108,3 +108,121 @@
 .form-control:focus {
     box-shadow: none !important;
 }
+
+.authen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .authen__header {
+    padding: 20px 0;
+  }
+  
+  .authen__header__title {
+    font-size: 2.8rem;
+    position: relative;
+    top: -8px;
+    margin-left: 20px;
+  }
+  
+  .authen__header__text {
+    font-size: 1.5rem;
+    color: #ee4d2d;
+  }
+  
+  .authen__content {
+    background-color: #ff8e4a;
+    padding: 50px 0;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .authen__form {
+    width: 45%;
+    background-color: white;
+    padding: 20px 40px;
+    margin: 0 auto;
+    border-radius: 10px;
+    font-size: 1.4rem;
+  }
+  
+  .authen__form__title {
+    font-size: 2.4rem;
+    margin-bottom: 50px;
+  }
+  
+  .authen__form .form-control {
+    padding: 10px 15px;
+    font-size: 1.4rem;
+  }
+  
+  .authen__password {
+    position: relative;
+  }
+  
+  .authen__password.active .eye--close {
+    display: none;
+  }
+  
+  .authen__password.active .eye--open {
+    display: block;
+  }
+  
+  .authen__password .eye--close {
+    position: absolute;
+    top: calc(50% + 2px);
+    right: 15px;
+  }
+  
+  .authen__password.is-invalid .eye--open {
+    top: calc(40%);
+    right: 25px;
+  }
+  
+  .authen__password.is-invalid .eye--close {
+    top: calc(40%);
+    right: 25px;
+  }
+  
+  .authen .eye--open {
+    display: none;
+    position: absolute;
+    top: calc(50% + 2px);
+    right: 15px;
+  }
+  
+  .authen__btn {
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    background-color: #ee4d2d;
+    color: white;
+    padding: 10px 0;
+    margin-top: 40px;
+  }
+  
+  .authen__btn:hover {
+    background-color: rgba(238, 77, 45, 0.8);
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .authen__remember {
+    position: relative;
+    top: 5px;
+    margin-left: 10px;
+    color: #ff8e4a;
+  }
+  
+  .authen__text {
+    text-align: center;
+    margin: 20px 0 10px;
+  }
+  
+  .authen__link {
+    color: #ff8e4a;
+  }

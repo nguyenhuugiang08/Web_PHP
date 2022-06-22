@@ -122,7 +122,7 @@ session_start();
                     </div>
                 </div>
             </div>
-            <a class="btn-order mt-5" <?= $_SESSION['login'] == "Successfully" ? "onclick='addOrder(" . $_SESSION['userId'] . ")'" : "href='user/index.php'" ?>>ĐẶT HÀNG</a>
+            <a class="btn-order mt-5" <?=isset($_SESSION['login']) && $_SESSION['login'] == "Successfully" ? "onclick='addOrder(" . $_SESSION['userId'] . ")'" : "href='user/index.php'" ?>>ĐẶT HÀNG</a>
         </div>
     </div>
 </div>
@@ -233,9 +233,9 @@ require_once('layouts/footer.php');
                 "email": $('#email')[0].value,
                 "description": $('#description')[0].value,
             }, function(data) {
-                location.reload()
-                alert(data)
+                alert('Thanh toán thành công')
             })
+            location.href = "http://localhost/BLT_Php/"
         }else alert('Bạn cần nhập đầy đủ thông tin.')
     }
 

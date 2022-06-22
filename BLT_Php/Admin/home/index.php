@@ -19,6 +19,9 @@ $countCate = executeResultOne($sql);
 $sql = "select count(id) as countFeedback from feedback";
 $countFeedback = executeResultOne($sql);
 
+$sql = "select count(id) as countOrder from orders";
+$countOrder = executeResultOne($sql);
+
 ?>
 
 <div class="home-content">
@@ -81,7 +84,7 @@ $countFeedback = executeResultOne($sql);
                     <div class="small-box p-3 pt-4 pb-2 rounded-3 mt-4 bg-danger">
                         <div class="inner d-flex justify-content-between mb-4">
                             <div>
-                                <h3><?=$countCate['countCate']?></h3>
+                                <h3><?=$countOrder['countOrder']?></h3>
                                 <h4>ĐƠN HÀNG</h4>
                             </div>
                             <div class="icon">
@@ -106,22 +109,6 @@ $countFeedback = executeResultOne($sql);
                         <a href="#" class="small-box-footer small-box-footer__link">Chi tiết <i class="fas fa-arrow-circle-right small-box__icon"></i></a>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <!-- small box -->
-                    <div class="small-box p-3 pt-4 pb-2 rounded-3 mt-4 bg-secondary">
-                        <div class="inner d-flex justify-content-between mb-4">
-                            <div>
-                                <h3>65</h3>
-                                <h4>ĐƠN HÀNG</h4>
-                            </div>
-                            <div class="icon">
-                                <i class="fa-solid fa-cart-plus" style="color: rgba(0,0,0,0.2); font-size: 72px;"></i>
-                            </div>
-                        </div>
-                        <a href="#" class="small-box-footer small-box-footer__link">Chi tiết <i class="fas fa-arrow-circle-right small-box__icon"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
             </div>
         </div>
     </section>
